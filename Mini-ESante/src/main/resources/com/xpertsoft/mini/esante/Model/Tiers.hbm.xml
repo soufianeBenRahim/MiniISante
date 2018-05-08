@@ -23,6 +23,13 @@
         <property name="amois" type="java.lang.Boolean">
             <column name="AMOIS" />
         </property>
-        
+           <set name="prescriptions" inverse="true" cascade="all">
+            <key column="CODE_PATIENT" not-null="true" />
+            <one-to-many class="com.xpertsoft.mini.esante.Model.Prescriptionentet"/>
+             </set>  
+            <set name="Redigedprescriptions" inverse="true" cascade="all">
+            <key column="CODE_AUTEUR" not-null="true" />
+            <one-to-many class="com.xpertsoft.mini.esante.Model.Prescriptionentet"/>
+           </set>
     </class>
 </hibernate-mapping>

@@ -29,8 +29,17 @@ public class Tiers  implements java.io.Serializable {
      private Date datenaissance;
      private Boolean amois;
     private Set<Prescriptionentet> prescriptions=new HashSet<Prescriptionentet>();
+    private Set<Prescriptionentet> Redigedprescriptions=new HashSet<Prescriptionentet>();
     public Tiers() {
         super();
+    }
+
+    public void setRedigedprescriptions(Set<Prescriptionentet> Redigedprescriptions) {
+        this.Redigedprescriptions = Redigedprescriptions;
+    }
+
+    public Set<Prescriptionentet> getRedigedprescriptions() {
+        return Redigedprescriptions;
     }
 
 	

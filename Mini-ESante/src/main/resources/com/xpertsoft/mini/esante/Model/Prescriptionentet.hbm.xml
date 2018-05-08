@@ -8,21 +8,28 @@
             <column name="CODE_PRESCRIPTION" />
             <generator class="assigned" />
         </id>
-        <property name="Patient" type="com.xpertsoft.mini.esante.Model.Tiers">
-            <column name="CODE_PATIENT" length="15" not-null="true" />
-        </property>
+        
         <property name="datePrescription" type="date">
             <column name="DATE_PRESCRIPTION" length="10" />
         </property>
         <property name="organisation" type="string">
             <column name="ORGANISATION" length="40" />
         </property>
-        <property name="Auteur" type="com.xpertsoft.mini.esante.Model.Tiers">
-            <column name="CODE_AUTEUR" length="15" />
-        </property>
+         
         <property name="observation" type="string">
             <column name="OBSERVATION" length="32700" />
         </property>
+         <many-to-one name="Auteur" class="com.xpertsoft.mini.esante.Model.Tiers"
+            column="CODE_AUTEUR" not-null="true"/>
+          
+          <many-to-one name="Patient" class="com.xpertsoft.mini.esante.Model.Tiers"
+          column="CODE_PATIENT" not-null="true"/>
+          
+            <set name="detail" inverse="true" cascade="all">
+            <key column="CODE_PRESPECTION" not-null="true" />
+            <one-to-many class="com.xpertsoft.mini.esante.Model.PrescriptionDetail"/>
+            </set>
+           
         
     </class>
 </hibernate-mapping>

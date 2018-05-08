@@ -11,8 +11,7 @@
         <property name="description" type="string">
             <column name="DESCRIPTION" length="32700" />
         </property>
-        <property name="Prespection" type="com.xpertsoft.mini.esante.Model.Prescriptionentet">
-            <column name="CODE_PRESPECTION" />
-        </property>
+                  <many-to-one name="prespection" class="com.xpertsoft.mini.esante.Model.Prescriptionentet"
+          column="CODE_PRESPECTION" not-null="true"/>
     </class>
 </hibernate-mapping>

@@ -11,7 +11,7 @@ public class PrescriptionDetail  implements java.io.Serializable {
 
     private int codeDetail;
     private String description;
-    private Prescriptionentet Prespection;
+    private Prescriptionentet prespection;
 
     public PrescriptionDetail() {
     }
@@ -19,7 +19,7 @@ public class PrescriptionDetail  implements java.io.Serializable {
     public PrescriptionDetail(int codeDetail, String description, Prescriptionentet Prespection) {
        this.codeDetail = codeDetail;
        this.description = description;
-       this.Prespection = Prespection;
+       this.prespection = Prespection;
     }
    
     public int getCodeDetail() {
@@ -38,11 +38,11 @@ public class PrescriptionDetail  implements java.io.Serializable {
     }
 
     public Prescriptionentet getPrespection() {
-        return Prespection;
+        return prespection;
     }
 
     public void setPrespection(Prescriptionentet Prespection) {
-        this.Prespection = Prespection;
+        this.prespection = Prespection;
     }
   
 

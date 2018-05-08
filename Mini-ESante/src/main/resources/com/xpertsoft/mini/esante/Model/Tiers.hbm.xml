@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6 mai 2018 18:06:59 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.xpertsoft.mini.esante.Model.Tiers" table="TIERS" schema="NBUSER" optimistic-lock="version">
+        <id name="nss" type="string">
+            <column name="NSS" length="15" />
+            <generator class="assigned" />
+        </id>
+        <property name="nom" type="string">
+            <column name="NOM" length="45" />
+        </property>
+        <property name="prenom" type="string">
+            <column name="PRENOM" length="45" />
+        </property>
+        <property name="adress" type="string">
+            <column name="ADRESS" length="60" />
+        </property>
+        <property name="datenaissance" type="date">
+            <column name="DATENAISSANCE" length="10" />
+        </property>
+        <property name="amois" type="java.lang.Boolean">
+            <column name="AMOIS" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

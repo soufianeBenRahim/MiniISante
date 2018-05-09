@@ -125,12 +125,12 @@
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTextFieldId" alignment="0" pref="285" max="32767" attributes="0"/>
+                      <Component id="jTextFieldIdID" alignment="0" pref="285" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="jComboBoxPatient" alignment="0" pref="210" max="32767" attributes="0"/>
                               <Component id="jComboBoxAuteur" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jXDatePicker1" max="32767" attributes="0"/>
+                              <Component id="jXDatePickerDateNaissanc" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -161,14 +161,14 @@
                                   <Component id="jLabelID" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextFieldId" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldIdID" alignment="3" max="32767" attributes="0"/>
                                   <Component id="jLabelObservation" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabelDate" alignment="3" max="32767" attributes="0"/>
-                              <Component id="jXDatePicker1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jXDatePickerDateNaissanc" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -206,7 +206,7 @@
             <Property name="text" type="java.lang.String" value="ID"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldId">
+        <Component class="javax.swing.JTextField" name="jTextFieldIdID">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
@@ -273,7 +273,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldOrganisation">
         </Component>
-        <Component class="org.jdesktop.swingx.JXDatePicker" name="jXDatePicker1">
+        <Component class="org.jdesktop.swingx.JXDatePicker" name="jXDatePickerDateNaissanc">
         </Component>
       </SubComponents>
     </Container>
@@ -326,6 +326,9 @@
         <Property name="text" type="java.lang.String" value="Modifier"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonModifierLigneActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSend">
       <Properties>

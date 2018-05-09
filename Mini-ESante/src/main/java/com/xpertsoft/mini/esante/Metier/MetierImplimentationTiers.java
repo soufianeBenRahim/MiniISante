@@ -230,6 +230,30 @@ public class MetierImplimentationTiers implements ImetierTiers {
       return D;
     }
 
+    public List<Prescriptionentet> getAllPrescription() {
+           //Get the session from the session factory.
+      Session session = Util.getSessionFactory().openSession();
+      Transaction tx = null;
+      List<Prescriptionentet> PrescriptionResult=new ArrayList<Prescriptionentet>();
+      try{
+         tx = session.beginTransaction();
+         //Make an HQL query to get the results from books table . You can also use SQL here.
+       PrescriptionResult=  session.createQuery("FROM Prescriptionentet").list();
+         //Iterate over the result and print it.
+       
+         tx.commit();
+
+      }catch (HibernateException e) {
+         if (tx!=null) tx.rollback();
+         e.printStackTrace();
+         
+      }finally {
+         session.close();
+         
+      }
+      return PrescriptionResult;
+    }
+
  
 
 }

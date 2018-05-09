@@ -26,12 +26,20 @@ public class menu extends javax.swing.JFrame  {
         this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
        
         displayTiers();
+       // displayPrescription();
     }
     
     private void displayTiers() {
          MetierImplimentationTiers impTiers=new MetierImplimentationTiers();
     this.TableTiers.setModel(new AbstractTableModelTiers(impTiers.getALLTiers()));
     }
+    
+     private void displayPrescription() {
+         MetierImplimentationTiers impTiers=new MetierImplimentationTiers();
+         this.jTablePRescription.setModel(new AbstractTableModelPrescription(impTiers.getAllPrescription()));
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -296,10 +304,17 @@ public class menu extends javax.swing.JFrame  {
     }//GEN-LAST:event_jButtonSupprimerPrescription1ActionPerformed
 
     private void jButtonAjouterPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterPrescriptionActionPerformed
-      FichePrescription FP = new FichePrescription(this, true,"Ajouter");
-        FP.setVisible(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAjouterPrescriptionActionPerformed
+      FichePrescription FP = new FichePrescription(this, true,"Ajouter",null);
+        FP.setVisible(true); 
+        
 
+    }//GEN-LAST:event_jButtonAjouterPrescriptionActionPerformed
+    public static void main(String[] args) {
+         // TODO code application logic here
+         menu menu = new menu();
+   
+        menu.setVisible(true);
+    }  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PannelPerspection;

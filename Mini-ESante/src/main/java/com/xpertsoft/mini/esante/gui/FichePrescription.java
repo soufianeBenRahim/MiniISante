@@ -6,6 +6,9 @@
 package com.xpertsoft.mini.esante.gui;
 
 import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
+import com.xpertsoft.mini.esante.Model.PrescriptionDetail;
+import com.xpertsoft.mini.esante.Model.Prescriptionentet;
+import java.util.List;
 
 /**
  *
@@ -17,10 +20,28 @@ public class FichePrescription extends javax.swing.JDialog {
      * Creates new form FicheEntreeStock
      */
     String ModAppel;
-    public FichePrescription(java.awt.Frame parent, boolean modal,String _ModAppel) {
+    Prescriptionentet prescription;
+    public FichePrescription(java.awt.Frame parent, boolean modal,String _ModAppel,Prescriptionentet _p) {
         super(parent, modal);
         initComponents();
         ModAppel=_ModAppel;
+        prescription=_p;
+        switch(ModAppel){
+            case "Modifier":
+                if(!prescription.equals(null)){
+                jTextFieldIdID.setText(String.valueOf(prescription.getCodePrescription()));
+                jXDatePickerDateNaissanc.setDate(prescription.getDatePrescription());
+                jTextAreaObservation.setText(prescription.getObservation());
+                jTextFieldOrganisation.setText(prescription.getOrganisation());
+                jTableDetalPrescription.setModel(new AbstractTableModelPrescriptionDetail((List<PrescriptionDetail>) prescription.getDetail()));
+                }
+                break;
+                
+            case "Ajouter":
+                
+                
+                break;
+        }
     }
 
     /**
@@ -35,7 +56,7 @@ public class FichePrescription extends javax.swing.JDialog {
         jLabelEntet = new javax.swing.JLabel();
         jPanelEntete = new javax.swing.JPanel();
         jLabelID = new javax.swing.JLabel();
-        jTextFieldId = new javax.swing.JTextField();
+        jTextFieldIdID = new javax.swing.JTextField();
         jLabelDate = new javax.swing.JLabel();
         jLabelMagazin = new javax.swing.JLabel();
         jComboBoxAuteur = new javax.swing.JComboBox<>();
@@ -46,7 +67,7 @@ public class FichePrescription extends javax.swing.JDialog {
         jTextAreaObservation = new javax.swing.JTextArea();
         jTextFieldNomChafeur = new javax.swing.JLabel();
         jTextFieldOrganisation = new javax.swing.JTextField();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        jXDatePickerDateNaissanc = new org.jdesktop.swingx.JXDatePicker();
         jScrollPaneDetalEntree = new javax.swing.JScrollPane();
         jTableDetalPrescription = new javax.swing.JTable();
         jButtonValider = new javax.swing.JButton();
@@ -65,7 +86,7 @@ public class FichePrescription extends javax.swing.JDialog {
 
         jLabelID.setText("ID");
 
-        jTextFieldId.setEditable(false);
+        jTextFieldIdID.setEditable(false);
 
         jLabelDate.setText("Date Prescription");
 
@@ -94,12 +115,12 @@ public class FichePrescription extends javax.swing.JDialog {
                     .addComponent(jLabelFournisseur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelEnteteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                    .addComponent(jTextFieldIdID, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
                     .addGroup(jPanelEnteteLayout.createSequentialGroup()
                         .addGroup(jPanelEnteteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jComboBoxPatient, javax.swing.GroupLayout.Alignment.LEADING, 0, 210, Short.MAX_VALUE)
                             .addComponent(jComboBoxAuteur, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jXDatePickerDateNaissanc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelEnteteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -122,12 +143,12 @@ public class FichePrescription extends javax.swing.JDialog {
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabelID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanelEnteteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextFieldId)
+                                .addComponent(jTextFieldIdID)
                                 .addComponent(jLabelObservation)))
                         .addGap(8, 8, 8)
                         .addGroup(jPanelEnteteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jXDatePickerDateNaissanc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelEnteteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelEnteteLayout.createSequentialGroup()
@@ -180,6 +201,11 @@ public class FichePrescription extends javax.swing.JDialog {
 
         jButtonModifierLigne.setText("Modifier");
         jButtonModifierLigne.setEnabled(false);
+        jButtonModifierLigne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModifierLigneActionPerformed(evt);
+            }
+        });
 
         jButtonSend.setText("Envoiyer");
 
@@ -263,14 +289,20 @@ switch(ModAppel){
         jButtonSuprimerLigne.enable(enabled);
     }
     private void jButtonAjouterLigneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterLigneActionPerformed
-FicheDetailPrescription FDP=new FicheDetailPrescription(null, true, "Ajouter",(int)jTableDetalPrescription.getValueAt(jTableDetalPrescription.getSelectedRow(),0),Integer.parseInt(jTextFieldId.getText()));
+FicheDetailPrescription FDP=new FicheDetailPrescription(null, true, "Ajouter",(int)jTableDetalPrescription.getValueAt(jTableDetalPrescription.getSelectedRow(),0),Integer.parseInt(jTextFieldIdID.getText()));
 FDP.setVisible(true);
 displayDetail();
     }//GEN-LAST:event_jButtonAjouterLigneActionPerformed
 
+    private void jButtonModifierLigneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifierLigneActionPerformed
+FicheDetailPrescription FDP=new FicheDetailPrescription(null, true, "Modifier",(int)jTableDetalPrescription.getValueAt(jTableDetalPrescription.getSelectedRow(),0),Integer.parseInt(jTextFieldIdID.getText()));
+FDP.setVisible(true);
+displayDetail();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonModifierLigneActionPerformed
+
     private void displayDetail() {
         MetierImplimentationTiers impTiers=new MetierImplimentationTiers();
-        this.jTableDetalPrescription.setModel(new AbstractTableModelDescriptionDetail(impTiers.getDetailPrescription(Integer.parseInt(jTextFieldId.getText()))));
+        this.jTableDetalPrescription.setModel(new AbstractTableModelPrescriptionDetail(impTiers.getDetailPrescription(Integer.parseInt(jTextFieldIdID.getText()))));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -293,9 +325,9 @@ displayDetail();
     private javax.swing.JScrollPane jScrollPaneObservation;
     private javax.swing.JTable jTableDetalPrescription;
     private javax.swing.JTextArea jTextAreaObservation;
-    private javax.swing.JTextField jTextFieldId;
+    private javax.swing.JTextField jTextFieldIdID;
     private javax.swing.JLabel jTextFieldNomChafeur;
     private javax.swing.JTextField jTextFieldOrganisation;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
+    private org.jdesktop.swingx.JXDatePicker jXDatePickerDateNaissanc;
     // End of variables declaration//GEN-END:variables
 }

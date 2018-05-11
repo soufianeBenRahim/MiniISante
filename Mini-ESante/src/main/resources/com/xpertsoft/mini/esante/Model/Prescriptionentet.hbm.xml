@@ -17,7 +17,7 @@
         </property>
          
         <property name="observation" type="string">
-            <column name="OBSERVATION" length="32700" />
+            <column name="OBSERVATION" length="500" />
         </property>
          <many-to-one name="Auteur" class="com.xpertsoft.mini.esante.Model.Tiers"
             column="CODE_AUTEUR" not-null="true"  lazy ="false"/>

@@ -202,12 +202,13 @@ public class FicheTiers extends javax.swing.JDialog {
             switch (ModeAppale) {
                 case "Modifier":
 
-                M.SavePatient(T);
+                    M.UpdatePatient(T);
                    
                     break;
                 case "Ajouter":
 
-                M.UpdatePatient(T);
+         
+                   M.SavePatient(T);
                     break;
             }
         } catch (Exception ex) {

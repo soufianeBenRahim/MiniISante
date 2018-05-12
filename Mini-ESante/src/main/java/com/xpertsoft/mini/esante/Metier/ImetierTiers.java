@@ -24,9 +24,13 @@ public interface ImetierTiers {
         public List<Prescriptionentet> FindPrescriptions(Date dBegin,Date dEnd,Tiers Patient,String TypePrescription,Tiers Auteur);
 	public List<Prescriptionentet> getPrescriptionByTiers(Tiers Tiers);
         public List<Prescriptionentet> getAllPrescription();
+        public void DeletPrescriptionByID(int Id);
         // Prescription detail
         public int SaveOrUpdatePrescriptionDetail(PrescriptionDetail d);
         public PrescriptionDetail GetPrescriptionDetailByID(int ID);
         public List<PrescriptionDetail> getDetailPrescription(int IDPrescription);
+        public PrescriptionDetail setDescriptionToPrescriptionDetail(int Id,String Description);
+        public void DeletDetailPrescriptionByID(int Id);
+        public void DeletDetailPrescriptionByIDPrescription(int Id);
        
 }

@@ -12,6 +12,6 @@
             <column name="DESCRIPTION" length="32700" />
         </property>
                   <many-to-one name="prespection" class="com.xpertsoft.mini.esante.Model.Prescriptionentet"
-          column="CODE_PRESPECTION" not-null="true"/>
+          column="CODE_PRESPECTION" not-null="true" lazy ="false"/>
     </class>
 </hibernate-mapping>

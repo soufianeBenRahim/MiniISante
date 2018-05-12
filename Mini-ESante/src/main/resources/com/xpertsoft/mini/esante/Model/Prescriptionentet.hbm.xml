@@ -20,14 +20,14 @@
             <column name="OBSERVATION" length="32700" />
         </property>
          <many-to-one name="Auteur" class="com.xpertsoft.mini.esante.Model.Tiers"
-            column="CODE_AUTEUR" not-null="true"/>
+            column="CODE_AUTEUR" not-null="true"  lazy ="false"/>
           
           <many-to-one name="Patient" class="com.xpertsoft.mini.esante.Model.Tiers"
-          column="CODE_PATIENT" not-null="true"/>
+          column="CODE_PATIENT" not-null="true"  lazy ="false"/>
           
             <set name="detail" inverse="true" cascade="all">
             <key column="CODE_PRESPECTION" not-null="true" />
-            <one-to-many class="com.xpertsoft.mini.esante.Model.PrescriptionDetail"/>
+            <one-to-many class="com.xpertsoft.mini.esante.Model.PrescriptionDetail"  />
             </set>
            
         

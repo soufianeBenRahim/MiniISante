@@ -5,6 +5,7 @@
  */
 package com.xpertsoft.mini.esante.gui;
 
+import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
 import com.xpertsoft.mini.esante.Model.PrescriptionDetail;
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
 import java.util.List;
@@ -19,12 +20,13 @@ public class AbstractTableModelPrescriptionDetail extends AbstractTableModel {
     public AbstractTableModelPrescriptionDetail(List<PrescriptionDetail> Detail) {
         this.Detail = Detail;
      
-        this.entetes=new String[]{"ID","Description"};
+        this.entetes=new String[]{"Description"};
+        m=new MetierImplimentationTiers();
     }
     private List<PrescriptionDetail> Detail;
 
     private String[] entetes;
-
+    MetierImplimentationTiers m;
     @Override
     public int getRowCount() {
         return Detail.size();//To change body of generated methods, choose Tools | Templates.
@@ -44,11 +46,7 @@ public class AbstractTableModelPrescriptionDetail extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Detail.get(rowIndex).getCodeDetail();
-            case 1:
                 return Detail.get(rowIndex).getDescription();
-            case 2:
-                return Detail.get(rowIndex).getPrespection();
             default:
                 return null; //Ne devrait jamais arriver
         }
@@ -59,11 +57,8 @@ public class AbstractTableModelPrescriptionDetail extends AbstractTableModel {
         if (aValue != null) {
             switch (columnIndex) {
                 case 0:
-                    Detail.get(rowIndex).setCodeDetail((int) aValue);
-                case 1:
-                    Detail.get(rowIndex).setDescription((String) aValue);
-                case 2:
-                    Detail.get(rowIndex).setPrespection((Prescriptionentet) aValue);
+                    Detail.get(rowIndex).setDescription(m.setDescriptionToPrescriptionDetail(Detail.get(rowIndex).getCodeDetail(),(String) aValue).getDescription());
+                   
                 default:
             }
         }
@@ -73,17 +68,21 @@ public class AbstractTableModelPrescriptionDetail extends AbstractTableModel {
     public Class getColumnClass(int columnIndex) {
         return PrescriptionDetail.class.getDeclaredFields()[columnIndex].getClass();
     }
-
+   @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return true; //Toutes les cellules éditables
     }
-
-    public void addTiers(PrescriptionDetail element) {
+    
+   
+    public void addDetail(PrescriptionDetail element) {
         Detail.add(element);
         fireTableRowsInserted(Detail.size() - 1, Detail.size() - 1);
     }
 
     public void removeDetail(int rowIndex) {
+       
+        MetierImplimentationTiers m = new MetierImplimentationTiers();
+        m.DeletDetailPrescriptionByID(Detail.get(rowIndex).getCodeDetail());
         Detail.remove(rowIndex);
         fireTableRowsDeleted(rowIndex, rowIndex);
     }

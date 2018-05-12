@@ -39,7 +39,7 @@ class MyListeCellRenderer extends JPanel implements ListCellRenderer {
             String NSS=((Tiers) value).getNss();
             lbl[0].setText(NSS );
             String Nom=((Tiers) value).getNom();
-            lbl[2].setText(Nom);
+            lbl[2].setText(" || "+Nom);
             String Prenom=((Tiers) value).getPrenom();
             lbl[2].setText(" || "+Prenom);
         }

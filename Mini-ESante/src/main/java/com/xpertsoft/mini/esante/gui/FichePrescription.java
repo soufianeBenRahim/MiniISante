@@ -9,7 +9,9 @@ import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
 import com.xpertsoft.mini.esante.Model.PrescriptionDetail;
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
 import com.xpertsoft.mini.esante.Model.Tiers;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -28,8 +30,8 @@ public class FichePrescription extends javax.swing.JDialog {
         ModAppel=_ModAppel;
         prescription=_p;
              MetierImplimentationTiers m=new MetierImplimentationTiers();
-                UTIL.RemplirComboBoxXD(jComboBoxAuteur, m.getALLTiers(), false, true);
-                UTIL.RemplirComboBoxXD(jComboBoxPatient, m.getALLTiers(), false, true);
+                UTIL.RemplirComboBoxXD(jComboBoxAuteur, m.getALLTiers(), false, false);
+                UTIL.RemplirComboBoxXD(jComboBoxPatient, m.getALLTiers(), false, false);
         switch(ModAppel){
             case "Modifier":
                 if(!prescription.equals(null)){
@@ -37,7 +39,7 @@ public class FichePrescription extends javax.swing.JDialog {
                 jXDatePickerDateNaissanc.setDate(prescription.getDatePrescription());
                 jTextAreaObservation.setText(prescription.getObservation());
                 jTextFieldOrganisation.setText(prescription.getOrganisation());
-                jTableDetalPrescription.setModel(new AbstractTableModelPrescriptionDetail((List<PrescriptionDetail>) prescription.getDetail()));
+                jTableDetalPrescription.setModel(new AbstractTableModelPrescriptionDetail(m.getDetailPrescription(prescription.getCodePrescription())));
                 jComboBoxAuteur.setSelectedItem(prescription.getAuteur());
                 jComboBoxPatient.setSelectedItem(prescription.getPatient());
                 }
@@ -65,7 +67,7 @@ public class FichePrescription extends javax.swing.JDialog {
         jTextFieldIdID = new javax.swing.JTextField();
         jLabelDate = new javax.swing.JLabel();
         jLabelMagazin = new javax.swing.JLabel();
-        jComboBoxAuteur = new javax.swing.JComboBox<>();
+        jComboBoxAuteur = new javax.swing.JComboBox<String>();
         jLabelFournisseur = new javax.swing.JLabel();
         jComboBoxPatient = new javax.swing.JComboBox<>();
         jLabelObservation = new javax.swing.JLabel();
@@ -77,10 +79,8 @@ public class FichePrescription extends javax.swing.JDialog {
         jScrollPaneDetalEntree = new javax.swing.JScrollPane();
         jTableDetalPrescription = new javax.swing.JTable();
         jButtonValider = new javax.swing.JButton();
-        jButtonAnnuler = new javax.swing.JButton();
         jButtonAjouterLigne = new javax.swing.JButton();
         jButtonSuprimerLigne = new javax.swing.JButton();
-        jButtonModifierLigne = new javax.swing.JButton();
         jButtonSend = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -192,8 +192,6 @@ public class FichePrescription extends javax.swing.JDialog {
             }
         });
 
-        jButtonAnnuler.setText("Annuler");
-
         jButtonAjouterLigne.setText("Ajouter");
         jButtonAjouterLigne.setEnabled(false);
         jButtonAjouterLigne.addActionListener(new java.awt.event.ActionListener() {
@@ -204,16 +202,18 @@ public class FichePrescription extends javax.swing.JDialog {
 
         jButtonSuprimerLigne.setText("Suprimer");
         jButtonSuprimerLigne.setEnabled(false);
-
-        jButtonModifierLigne.setText("Modifier");
-        jButtonModifierLigne.setEnabled(false);
-        jButtonModifierLigne.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSuprimerLigne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonModifierLigneActionPerformed(evt);
+                jButtonSuprimerLigneActionPerformed(evt);
             }
         });
 
         jButtonSend.setText("Envoiyer");
+        jButtonSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSendActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -235,14 +235,10 @@ public class FichePrescription extends javax.swing.JDialog {
                             .addComponent(jPanelEntete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButtonSuprimerLigne, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButtonAjouterLigne, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButtonAnnuler, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jButtonModifierLigne, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButtonSuprimerLigne, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonAjouterLigne, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonValider, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -259,14 +255,9 @@ public class FichePrescription extends javax.swing.JDialog {
                             .addComponent(jScrollPaneDetalEntree, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButtonAjouterLigne)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonModifierLigne)
-                                .addGap(7, 7, 7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonSuprimerLigne))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonValider)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonAnnuler)))
+                    .addComponent(jButtonValider))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonSend)
                 .addGap(10, 10, 10))
@@ -299,25 +290,28 @@ switch(ModAppel){
         break;
 }
 Setenabled(true);
-this.setVisible(false);
+//this.setVisible(false);
 // TODO add your handling code here:
     }//GEN-LAST:event_jButtonValiderActionPerformed
     private void Setenabled(boolean enabled){
-        jButtonAjouterLigne.enable(enabled); 
-        jButtonModifierLigne.enable(enabled);
-        jButtonSuprimerLigne.enable(enabled);
+        jButtonAjouterLigne.setEnabled(enabled); 
+        
+        jButtonSuprimerLigne.setEnabled(enabled);
     }
     private void jButtonAjouterLigneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterLigneActionPerformed
-FicheDetailPrescription FDP=new FicheDetailPrescription(null, true, "Ajouter",(int)jTableDetalPrescription.getValueAt(jTableDetalPrescription.getSelectedRow(),0),Integer.parseInt(jTextFieldIdID.getText()));
+FicheDetailPrescription FDP=new FicheDetailPrescription(null, true, "Ajouter",0,Integer.parseInt(jTextFieldIdID.getText()));
 FDP.setVisible(true);
 displayDetail();
     }//GEN-LAST:event_jButtonAjouterLigneActionPerformed
 
-    private void jButtonModifierLigneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifierLigneActionPerformed
-FicheDetailPrescription FDP=new FicheDetailPrescription(null, true, "Modifier",(int)jTableDetalPrescription.getValueAt(jTableDetalPrescription.getSelectedRow(),0),Integer.parseInt(jTextFieldIdID.getText()));
-FDP.setVisible(true);
-displayDetail();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonModifierLigneActionPerformed
+    private void jButtonSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSendActionPerformed
+this.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSendActionPerformed
+
+    private void jButtonSuprimerLigneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuprimerLigneActionPerformed
+AbstractTableModelPrescriptionDetail model= (AbstractTableModelPrescriptionDetail)this.jTableDetalPrescription.getModel(); 
+model.removeDetail(this.jTableDetalPrescription.getSelectedRow());
+    }//GEN-LAST:event_jButtonSuprimerLigneActionPerformed
 
     private void displayDetail() {
         MetierImplimentationTiers impTiers=new MetierImplimentationTiers();
@@ -326,8 +320,6 @@ displayDetail();        // TODO add your handling code here:
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAjouterLigne;
-    private javax.swing.JButton jButtonAnnuler;
-    private javax.swing.JButton jButtonModifierLigne;
     private javax.swing.JButton jButtonSend;
     private javax.swing.JButton jButtonSuprimerLigne;
     private javax.swing.JButton jButtonValider;

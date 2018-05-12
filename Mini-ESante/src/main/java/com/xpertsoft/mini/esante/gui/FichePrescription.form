@@ -42,17 +42,11 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jButtonSuprimerLigne" max="32767" attributes="0"/>
-                                  <Component id="jButtonAjouterLigne" min="-2" pref="75" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jButtonAnnuler" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jButtonValider" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jButtonSuprimerLigne" max="32767" attributes="0"/>
+                              <Component id="jButtonAjouterLigne" min="-2" pref="75" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jButtonModifierLigne" alignment="1" min="-2" pref="75" max="-2" attributes="0"/>
+                          <Component id="jButtonValider" alignment="1" min="-2" pref="75" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -74,18 +68,12 @@
                           <Component id="jScrollPaneDetalEntree" min="-2" pref="404" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="jButtonAjouterLigne" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jButtonModifierLigne" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButtonSuprimerLigne" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jButtonValider" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButtonAnnuler" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jButtonValider" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jButtonSend" min="-2" max="-2" attributes="0"/>
@@ -228,6 +216,7 @@
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;String&gt;()"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
@@ -301,11 +290,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonValiderActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonAnnuler">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Annuler"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="jButtonAjouterLigne">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ajouter"/>
@@ -320,20 +304,17 @@
         <Property name="text" type="java.lang.String" value="Suprimer"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButtonModifierLigne">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Modifier"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonModifierLigneActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSuprimerLigneActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSend">
       <Properties>
         <Property name="text" type="java.lang.String" value="Envoiyer"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSendActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

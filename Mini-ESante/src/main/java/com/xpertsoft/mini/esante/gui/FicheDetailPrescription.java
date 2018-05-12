@@ -59,9 +59,10 @@ public class FicheDetailPrescription extends javax.swing.JDialog {
         this.IDPrscription=IDPrescription;
             if(ModAppel.equals("Modifier")){
             MetierImplimentationTiers m=new MetierImplimentationTiers();
-                PrescriptionDetail d=m.GetPrescriptionDetailByID(ID);
-            jTextFieldID.setText(String.valueOf(ID));
-            if(d.equals(null)) return;
+                PrescriptionDetail d=m.GetPrescriptionDetailByID(IDPrescription);
+                if(d.equals(null)) return;
+            jTextFieldID.setText(String.valueOf(IDPrescription));
+            
             jTextFieldDescription.setText(d.getDescription());
           
         }
@@ -172,11 +173,11 @@ public class FicheDetailPrescription extends javax.swing.JDialog {
                    d.setDescription(jTextFieldDescription.getText());
           
                   
-            
+              Prescriptionentet p =M.GetPrescriptionentetByID(IDPrscription);
+                d.setPrespection(p);
             switch (ModAppel) {
                 case "Modifier":
-                Prescriptionentet p =M.GetPrescriptionentetByID(IDPrscription);
-                d.setPrespection(p);
+              
                 M.SaveOrUpdatePrescriptionDetail(d);
                    
                     break;

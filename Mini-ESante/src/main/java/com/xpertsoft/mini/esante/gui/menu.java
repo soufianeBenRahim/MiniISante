@@ -40,8 +40,9 @@ public class menu extends javax.swing.JFrame  {
          List<Prescriptionentet> pres=impTiers.getAllPrescription();
          
          this.jTablePRescription.setModel(new AbstractTableModelPrescription(pres));
-         if(pres.size()>0) {this.jTablePRescription.setRowSelectionInterval(0, 0);
-         displayPrescriptionDetail(Integer.parseInt(this.jTablePRescription.
+         if(pres.size()>0) {
+                this.jTablePRescription.setRowSelectionInterval(0, 0);
+                displayPrescriptionDetail(Integer.parseInt(this.jTablePRescription.
                  getValueAt(0, 0).toString()));
          }
     }
@@ -76,7 +77,7 @@ public class menu extends javax.swing.JFrame  {
         jScrollPaneTableProduit1 = new javax.swing.JScrollPane();
         jTablePrescriptionDetail = new javax.swing.JTable();
         jButtonExposerPrescription = new javax.swing.JButton();
-        jButtonSupprimerPrescription1 = new javax.swing.JButton();
+        jButtonModifierPrescription = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("menu");
@@ -176,6 +177,11 @@ public class menu extends javax.swing.JFrame  {
 
             }
         ));
+        jTablePRescription.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablePRescriptionMouseClicked(evt);
+            }
+        });
         jScrollPaneTableProduit.setViewportView(jTablePRescription);
 
         jButtonAjouterPrescription.setText("Ajouter Prescriptionit");
@@ -212,10 +218,10 @@ public class menu extends javax.swing.JFrame  {
             }
         });
 
-        jButtonSupprimerPrescription1.setText("Modifier prescription");
-        jButtonSupprimerPrescription1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModifierPrescription.setText("Modifierr Prescriptionit");
+        jButtonModifierPrescription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSupprimerPrescription1ActionPerformed(evt);
+                jButtonModifierPrescriptionActionPerformed(evt);
             }
         });
 
@@ -230,10 +236,10 @@ public class menu extends javax.swing.JFrame  {
                     .addGroup(PannelPerspectionLayout.createSequentialGroup()
                         .addComponent(jButtonAjouterPrescription)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonModifierPrescription)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonSupprimerPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonSupprimerPrescription1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonExposerPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPaneTableProduit))
@@ -247,7 +253,7 @@ public class menu extends javax.swing.JFrame  {
                     .addComponent(jButtonAjouterPrescription)
                     .addComponent(jButtonSupprimerPrescription)
                     .addComponent(jButtonExposerPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonSupprimerPrescription1))
+                    .addComponent(jButtonModifierPrescription))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPaneTableProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -278,7 +284,10 @@ public class menu extends javax.swing.JFrame  {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSupprimerPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupprimerPrescriptionActionPerformed
-        // TODO add your handling code here:
+           MetierImplimentationTiers m =new MetierImplimentationTiers();
+        AbstractTableModelPrescription model=(AbstractTableModelPrescription)jTablePRescription.getModel();
+        model.removePrescription(jTablePRescription.getSelectedRow());
+        displayPrescription();
     }//GEN-LAST:event_jButtonSupprimerPrescriptionActionPerformed
 
     private void jButtonExposerPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExposerPrescriptionActionPerformed
@@ -296,8 +305,12 @@ public class menu extends javax.swing.JFrame  {
 
     private void jButtonSupprimerTiersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupprimerTiersActionPerformed
         MetierImplimentationTiers m =new MetierImplimentationTiers();
-        m.DeletTiersByID((String) TableTiers.getValueAt(TableTiers.getSelectedRow(), 0));
+        AbstractTableModelTiers model=(AbstractTableModelTiers)TableTiers.getModel();
+        int row=TableTiers.getSelectedRow();
+        if(row<0) return;
+        model.removeTiers(row);
         displayTiers();
+        displayPrescription();
     }//GEN-LAST:event_jButtonSupprimerTiersActionPerformed
 
     private void jButtonGetPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGetPrescriptionActionPerformed
@@ -310,17 +323,30 @@ public class menu extends javax.swing.JFrame  {
         displayTiers();        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonModifierTiersActionPerformed
 
-    private void jButtonSupprimerPrescription1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupprimerPrescription1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonSupprimerPrescription1ActionPerformed
-
     private void jButtonAjouterPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterPrescriptionActionPerformed
-      FichePrescription FP = new FichePrescription(this, true,"Ajouter",new Prescriptionentet());
+        FichePrescription FP = new FichePrescription(this, true,"Ajouter",new Prescriptionentet());
         FP.setVisible(true); 
-        this.displayPrescription();
+        this.displayPrescription();  
         
 
     }//GEN-LAST:event_jButtonAjouterPrescriptionActionPerformed
+
+    private void jButtonModifierPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifierPrescriptionActionPerformed
+        MetierImplimentationTiers m = new MetierImplimentationTiers();
+        FichePrescription FP = new FichePrescription(this, true,"Modifier",m.GetPrescriptionentetByID((int)jTablePRescription.getValueAt(jTablePRescription.getSelectedRow(), 0)));
+        FP.setVisible(true); 
+        this.displayPrescription();  
+    }//GEN-LAST:event_jButtonModifierPrescriptionActionPerformed
+
+    private void jTablePRescriptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePRescriptionMouseClicked
+int row=jTablePRescription.getSelectedRow();
+if (row>=0){
+    int value=(int)jTablePRescription.getValueAt(row, 0);
+this.displayPrescriptionDetail(value);
+}
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTablePRescriptionMouseClicked
     public static void main(String[] args) {
          // TODO code application logic here
          menu menu = new menu();
@@ -336,9 +362,9 @@ public class menu extends javax.swing.JFrame  {
     public javax.swing.JButton jButtonAjouterTiers;
     public javax.swing.JButton jButtonExposerPrescription;
     public javax.swing.JButton jButtonGetPrescription;
+    public javax.swing.JButton jButtonModifierPrescription;
     public javax.swing.JButton jButtonModifierTiers;
     public javax.swing.JButton jButtonSupprimerPrescription;
-    public javax.swing.JButton jButtonSupprimerPrescription1;
     public javax.swing.JButton jButtonSupprimerTiers;
     private javax.swing.JScrollPane jScrollPaneTableClient;
     private javax.swing.JScrollPane jScrollPaneTableProduit;

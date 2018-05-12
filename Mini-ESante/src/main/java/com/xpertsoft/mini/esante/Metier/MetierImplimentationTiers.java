@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
+import java.util.Set;
 
 public class MetierImplimentationTiers implements ImetierTiers {
 
@@ -137,7 +138,7 @@ public class MetierImplimentationTiers implements ImetierTiers {
         int ID =0;
         try {
             tx = session.beginTransaction();
-           ID=(int)  session.merge(d);
+           ID=(int)  session.save(d);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {
@@ -267,6 +268,85 @@ public class MetierImplimentationTiers implements ImetierTiers {
          
       }
       return PrescriptionResult;
+    }
+
+    @Override
+    public PrescriptionDetail setDescriptionToPrescriptionDetail(int Id, String Description) {
+      Session session = Util.getSessionFactory().openSession();
+      Transaction tx = null;
+      PrescriptionDetail D ;
+      try {
+         tx = session.beginTransaction();
+          D=(PrescriptionDetail)session.get(PrescriptionDetail.class, Id); 
+          D.setDescription(Description);
+          tx.commit();
+      } catch (HibernateException e) {
+         if (tx!=null) tx.rollback();
+         e.printStackTrace(); 
+         D=null;
+      } finally {
+         session.close(); 
+      }
+      return D;
+    }
+
+    @Override
+    public void DeletDetailPrescriptionByID(int Id) {
+         
+            Session session = Util.getSessionFactory().openSession();
+      Transaction tx = null;
+      PrescriptionDetail d ;
+      try {
+         tx = session.beginTransaction();
+          d=(PrescriptionDetail)session.get(PrescriptionDetail.class, Id); 
+         session.delete(d); 
+         tx.commit();
+      } catch (HibernateException e) {
+         if (tx!=null) tx.rollback();
+         e.printStackTrace(); 
+
+      } finally {
+         session.close(); 
+      }
+
+        }
+
+    @Override
+    public void DeletPrescriptionByID(int Id) {
+                Session session = Util.getSessionFactory().openSession();
+      Transaction tx = null;
+      Prescriptionentet p ;
+      try {
+         tx = session.beginTransaction();
+          p=(Prescriptionentet)session.get(Prescriptionentet.class, Id); 
+         session.delete(p); 
+         tx.commit();
+      } catch (HibernateException e) {
+         if (tx!=null) tx.rollback();
+         e.printStackTrace(); 
+
+      } finally {
+         session.close(); 
+      }
+    }
+
+    @Override
+    public void DeletDetailPrescriptionByIDPrescription(int Id) {
+                      Session session = Util.getSessionFactory().openSession();
+      Transaction tx = null;
+      Prescriptionentet p ;
+      try {
+         tx = session.beginTransaction();
+          p=(Prescriptionentet)session.get(Prescriptionentet.class, Id); 
+         p.getDetail().clear();
+         tx.commit();
+      } catch (HibernateException e) {
+         if (tx!=null) tx.rollback();
+         e.printStackTrace(); 
+
+      } finally {
+         session.close(); 
+      }
     }
 
  

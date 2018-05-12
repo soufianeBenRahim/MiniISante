@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.xpertsoft.mini.esante.gui;
+import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
 import com.xpertsoft.mini.esante.Model.Tiers;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -107,8 +108,10 @@ public Class getColumnClass(int columnIndex){
     }
  
     public void removeTiers(int rowIndex) {
-        ListeTiers.remove(rowIndex);
- 
+        
+    MetierImplimentationTiers m = new MetierImplimentationTiers();
+        m.DeletTiersByID(ListeTiers.get(rowIndex).getNss());
+         ListeTiers.remove(rowIndex);
         fireTableRowsDeleted(rowIndex, rowIndex);
        
     }

@@ -126,7 +126,6 @@ public class AbstractTableModelPrescription extends AbstractTableModel{
         MetierImplimentationTiers m = new MetierImplimentationTiers();
         int code=Prescriptios.get(rowIndex).getCodePrescription();
         m.DeletPrescriptionByID(code);
-        m.DeletDetailPrescriptionByIDPrescription(code);
         Prescriptios.remove(rowIndex);
         fireTableRowsDeleted(rowIndex, rowIndex);
     }

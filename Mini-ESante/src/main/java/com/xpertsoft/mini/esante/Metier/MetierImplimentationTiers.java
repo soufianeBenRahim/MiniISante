@@ -112,7 +112,22 @@ public class MetierImplimentationTiers implements ImetierTiers {
 
     @Override
     public int SaveOrUpdatePrescriptionEntet(Prescriptionentet p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          Session session = Util.getSessionFactory().openSession();
+        Transaction tx = null;
+        int IDPatient = 0;
+        try {
+            tx = session.beginTransaction();
+            IDPatient = (int) session.save(p);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return IDPatient;
     }
 
     @Override
@@ -153,7 +168,7 @@ public class MetierImplimentationTiers implements ImetierTiers {
       List<PrescriptionDetail> Detail =new ArrayList<PrescriptionDetail>();
       try {
          tx = session.beginTransaction();
-         Detail = session.createQuery("FROM PrescriptionDetail d where d.Prespection.codePrescription= "+IDPrescription).list(); 
+         Detail = session.createQuery("FROM PrescriptionDetail d where d.prespection.codePrescription= "+IDPrescription).list(); 
   
          tx.commit();
          return Detail;

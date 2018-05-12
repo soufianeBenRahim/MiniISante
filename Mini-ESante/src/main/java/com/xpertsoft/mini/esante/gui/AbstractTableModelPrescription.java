@@ -17,6 +17,9 @@ import javax.swing.table.AbstractTableModel;
 public class AbstractTableModelPrescription extends AbstractTableModel{
       public AbstractTableModelPrescription(List<Prescriptionentet> _Prescriptios) {
         this.Prescriptios = _Prescriptios;
+
+     this.entetes=new String[]{"ID","Patient","Date prescription","Organisation","Auteur","Observation"};
+     
     }
     private List<Prescriptionentet> Prescriptios;
 

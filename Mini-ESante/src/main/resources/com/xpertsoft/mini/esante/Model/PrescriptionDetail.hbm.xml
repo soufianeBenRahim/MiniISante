@@ -6,7 +6,7 @@
     <class name="com.xpertsoft.mini.esante.Model.PrescriptionDetail" table="PRESCRIPTION_DETAIL" schema="NBUSER" optimistic-lock="version">
         <id name="codeDetail" type="int">
             <column name="CODE_DETAIL" />
-            <generator class="assigned" />
+            <generator class="increment"/>
         </id>
         <property name="description" type="string">
             <column name="DESCRIPTION" length="32700" />

@@ -18,6 +18,8 @@ public class AbstractTableModelPrescriptionDetail extends AbstractTableModel {
 
     public AbstractTableModelPrescriptionDetail(List<PrescriptionDetail> Detail) {
         this.Detail = Detail;
+     
+        this.entetes=new String[]{"ID","Description"};
     }
     private List<PrescriptionDetail> Detail;
 

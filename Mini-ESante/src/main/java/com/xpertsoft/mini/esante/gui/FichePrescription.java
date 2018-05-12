@@ -8,6 +8,7 @@ package com.xpertsoft.mini.esante.gui;
 import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
 import com.xpertsoft.mini.esante.Model.PrescriptionDetail;
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
+import com.xpertsoft.mini.esante.Model.Tiers;
 import java.util.List;
 
 /**
@@ -26,6 +27,9 @@ public class FichePrescription extends javax.swing.JDialog {
         initComponents();
         ModAppel=_ModAppel;
         prescription=_p;
+             MetierImplimentationTiers m=new MetierImplimentationTiers();
+                UTIL.RemplirComboBoxXD(jComboBoxAuteur, m.getALLTiers(), false, true);
+                UTIL.RemplirComboBoxXD(jComboBoxPatient, m.getALLTiers(), false, true);
         switch(ModAppel){
             case "Modifier":
                 if(!prescription.equals(null)){
@@ -34,12 +38,14 @@ public class FichePrescription extends javax.swing.JDialog {
                 jTextAreaObservation.setText(prescription.getObservation());
                 jTextFieldOrganisation.setText(prescription.getOrganisation());
                 jTableDetalPrescription.setModel(new AbstractTableModelPrescriptionDetail((List<PrescriptionDetail>) prescription.getDetail()));
+                jComboBoxAuteur.setSelectedItem(prescription.getAuteur());
+                jComboBoxPatient.setSelectedItem(prescription.getPatient());
                 }
+                Setenabled(true);
                 break;
                 
             case "Ajouter":
-                
-                
+           
                 break;
         }
     }
@@ -275,12 +281,25 @@ public class FichePrescription extends javax.swing.JDialog {
 
 switch(ModAppel){
     case "Modifier":
-        Setenabled(true);
+        
         break;
     case "Ajouter":
-        Setenabled(false);
+        
+          
+           prescription.setDatePrescription(jXDatePickerDateNaissanc.getDate());
+           prescription.setObservation(jTextAreaObservation.getText());
+           prescription.setOrganisation(jTextFieldOrganisation.getText());
+             prescription.setAuteur((Tiers)jComboBoxAuteur.getSelectedItem());
+             prescription.setPatient((Tiers)jComboBoxAuteur.getSelectedItem());
+           MetierImplimentationTiers m=new MetierImplimentationTiers();
+           this.jTextFieldIdID.setText(String.valueOf(m.SaveOrUpdatePrescriptionEntet(prescription)));
+           setEnabled(true);
+//           jTableDetalPrescription.setModel(new AbstractTableModelPrescriptionDetail((List<PrescriptionDetail>) prescription.getDetail()));
+        
         break;
 }
+Setenabled(true);
+this.setVisible(false);
 // TODO add your handling code here:
     }//GEN-LAST:event_jButtonValiderActionPerformed
     private void Setenabled(boolean enabled){

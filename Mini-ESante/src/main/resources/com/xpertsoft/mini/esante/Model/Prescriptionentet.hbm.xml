@@ -6,7 +6,7 @@
     <class name="com.xpertsoft.mini.esante.Model.Prescriptionentet" table="PRESCRIPTIONENTET" schema="NBUSER" optimistic-lock="version">
         <id name="codePrescription" type="int">
             <column name="CODE_PRESCRIPTION" />
-            <generator class="assigned" />
+            <generator class="increment"/>
         </id>
         
         <property name="datePrescription" type="date">

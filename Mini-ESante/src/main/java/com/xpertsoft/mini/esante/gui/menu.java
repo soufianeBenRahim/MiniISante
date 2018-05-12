@@ -1,6 +1,7 @@
 package com.xpertsoft.mini.esante.gui;
 
 import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
+import com.xpertsoft.mini.esante.Model.Prescriptionentet;
 import com.xpertsoft.mini.esante.Model.Tiers;
 import com.xpertsoft.mini.esante.Networking.INetwork;
 import com.xpertsoft.mini.esante.RMI.NetworkingRMI;
@@ -26,7 +27,7 @@ public class menu extends javax.swing.JFrame  {
         this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
        
         displayTiers();
-       // displayPrescription();
+        displayPrescription();
     }
     
     private void displayTiers() {
@@ -36,10 +37,20 @@ public class menu extends javax.swing.JFrame  {
     
      private void displayPrescription() {
          MetierImplimentationTiers impTiers=new MetierImplimentationTiers();
-         this.jTablePRescription.setModel(new AbstractTableModelPrescription(impTiers.getAllPrescription()));
+         List<Prescriptionentet> pres=impTiers.getAllPrescription();
+         
+         this.jTablePRescription.setModel(new AbstractTableModelPrescription(pres));
+         if(pres.size()>0) {this.jTablePRescription.setRowSelectionInterval(0, 0);
+         displayPrescriptionDetail(Integer.parseInt(this.jTablePRescription.
+                 getValueAt(0, 0).toString()));
+         }
     }
     
-    
+        private void displayPrescriptionDetail(int IDprescription) {
+            MetierImplimentationTiers impTiers=new MetierImplimentationTiers();
+            this.jTablePrescriptionDetail.setModel(new AbstractTableModelPrescriptionDetail(
+                    impTiers.getDetailPrescription(IDprescription)));
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -304,8 +315,9 @@ public class menu extends javax.swing.JFrame  {
     }//GEN-LAST:event_jButtonSupprimerPrescription1ActionPerformed
 
     private void jButtonAjouterPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterPrescriptionActionPerformed
-      FichePrescription FP = new FichePrescription(this, true,"Ajouter",null);
+      FichePrescription FP = new FichePrescription(this, true,"Ajouter",new Prescriptionentet());
         FP.setVisible(true); 
+        this.displayPrescription();
         
 
     }//GEN-LAST:event_jButtonAjouterPrescriptionActionPerformed

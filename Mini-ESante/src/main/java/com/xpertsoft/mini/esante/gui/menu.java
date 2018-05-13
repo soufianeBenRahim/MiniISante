@@ -3,7 +3,7 @@ package com.xpertsoft.mini.esante.gui;
 import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
 import com.xpertsoft.mini.esante.Model.Tiers;
-import com.xpertsoft.mini.esante.Networking.INetwork;
+
 import com.xpertsoft.mini.esante.RMI.NetworkingRMI;
 import java.util.List;
 import java.util.Observable;
@@ -18,7 +18,7 @@ public class menu extends javax.swing.JFrame  {
     /**
      * Creates new form menu
      */
-   INetwork Net;
+   NetworkingRMI Net;
 
     public menu() {
 

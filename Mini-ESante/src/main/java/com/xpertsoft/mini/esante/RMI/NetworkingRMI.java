@@ -3,7 +3,7 @@ package com.xpertsoft.mini.esante.RMI;
 import com.xpertsoft.annuaireminesante.IAnnuair;
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
 import com.xpertsoft.mini.esante.Model.Tiers;
-import com.xpertsoft.mini.esante.Networking.INetwork;
+
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -12,14 +12,14 @@ import java.rmi.registry.LocateRegistry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NetworkingRMI implements INetwork{
+public class NetworkingRMI {
 private ImplimentationService serviceImp;
-private Service stub;
+private IService stub;
 public NetworkingRMI(){
  
 }
 
-    @Override
+ 
     public void Recive() {
            try {
         LocateRegistry.createRegistry(1099);
@@ -33,7 +33,7 @@ public NetworkingRMI(){
 
 
 
-    @Override
+
     public String Connect(String name, String pass) {
      String result;
         try {
@@ -49,11 +49,11 @@ public NetworkingRMI(){
     } 
 
 
-    @Override
+
     public void SendTiers(Tiers T) {
            
     try {
-        stub = (Service)Naming.lookup("rmi://192.168.8.101:1099/Service");
+        stub = (IService)Naming.lookup("rmi://192.168.8.101:1099/Service");
         stub.SetTiers(T);
     } catch (NotBoundException ex) {
         Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,12 +64,11 @@ public NetworkingRMI(){
     }
     }
 
-    @Override
     public void SendPrescription(Prescriptionentet p) {
         
         
     try {
-        stub = (Service)Naming.lookup("rmi://192.168.8.101:1099/Service");
+        stub = (IService)Naming.lookup("rmi://192.168.8.101:1099/Service");
         stub.SetPrescription(p);
     } catch (NotBoundException ex) {
         Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);

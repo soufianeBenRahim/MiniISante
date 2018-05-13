@@ -16,7 +16,7 @@ import java.rmi.RemoteException;
  *
  * @author soufiane
  */
-public class ImplimentationService extends UnicastRemoteObject implements Service{
+public class ImplimentationService extends UnicastRemoteObject implements IService{
 public ImplimentationService() throws RemoteException{
     super();
 }

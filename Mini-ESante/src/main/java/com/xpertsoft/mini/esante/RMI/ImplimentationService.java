@@ -6,6 +6,7 @@
 package com.xpertsoft.mini.esante.RMI;
 
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
+import com.xpertsoft.mini.esante.Model.Tiers;
 
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
@@ -20,7 +21,7 @@ public ImplimentationService() throws RemoteException{
     super();
 }
    @Override
-    public String SetPrescription(Prescriptionentet p) throws RemoteException {
+    public String SetPrescription(Tiers p) throws RemoteException {
         
         return "OK"; //To change body of generated methods, choose Tools | Templates.
     }

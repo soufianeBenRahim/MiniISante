@@ -197,7 +197,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButtonSupprimerPrescription" min="-2" pref="161" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jButtonExposerPrescription" min="-2" pref="157" max="-2" attributes="0"/>
+                              <Component id="jButtonEnvoiyerPrescription" min="-2" pref="157" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jScrollPaneTableProduit" max="32767" attributes="0"/>
@@ -213,7 +213,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButtonAjouterPrescription" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonSupprimerPrescription" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonExposerPrescription" alignment="3" max="32767" attributes="0"/>
+                          <Component id="jButtonEnvoiyerPrescription" alignment="3" max="32767" attributes="0"/>
                           <Component id="jButtonModifierPrescription" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -295,12 +295,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButtonExposerPrescription">
+            <Component class="javax.swing.JButton" name="jButtonEnvoiyerPrescription">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Partager Prescription"/>
+                <Property name="text" type="java.lang.String" value="Envoiyer Prescription"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExposerPrescriptionActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEnvoiyerPrescriptionActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

@@ -6,6 +6,7 @@
 package com.xpertsoft.mini.esante.RMI;
 
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
+import com.xpertsoft.mini.esante.Model.Tiers;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -14,5 +15,5 @@ import java.rmi.RemoteException;
  * @author soufiane
  */
 public interface Service extends Remote{
-    public String SetPrescription(Prescriptionentet p) throws RemoteException;
+    public String SetPrescription(Tiers p) throws RemoteException;
 }

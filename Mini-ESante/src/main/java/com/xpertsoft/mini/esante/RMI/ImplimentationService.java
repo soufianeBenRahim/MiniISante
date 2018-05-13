@@ -21,9 +21,14 @@ public ImplimentationService() throws RemoteException{
     super();
 }
    @Override
-    public String SetPrescription(Tiers p) throws RemoteException {
+    public String SetPrescription(Prescriptionentet p) throws RemoteException {
         
         return "OK"; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String SetTiers(Tiers p) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

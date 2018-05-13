@@ -292,10 +292,10 @@ public class menu extends javax.swing.JFrame  {
 
     private void jButtonEnvoiyerPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoiyerPrescriptionActionPerformed
        if (Net==null) Net=new NetworkingRMI();
-        String ID=(String) TableTiers.getValueAt(TableTiers.getSelectedRow(),0);
+        int ID=(int) jTablePRescription.getValueAt(jTablePRescription.getSelectedRow(),0);
         MetierImplimentationTiers m = new MetierImplimentationTiers();
-        Tiers p=m.GetTiersByID(ID);
-        Net.Send(p);
+        Prescriptionentet p=m.GetPrescriptionentetByID(ID);
+        Net.SendPrescription(p);
 // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEnvoiyerPrescriptionActionPerformed
 

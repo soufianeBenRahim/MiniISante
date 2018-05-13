@@ -6,7 +6,7 @@ import com.xpertsoft.mini.esante.Model.Tiers;
 public interface INetwork {
     
 	public void Recive();
-        public void Send(Tiers T);
-        public void Send(Prescriptionentet p);
+        public void SendTiers(Tiers T);
+        public void SendPrescription(Prescriptionentet p);
         public String Connect(String name,String pass);
 }

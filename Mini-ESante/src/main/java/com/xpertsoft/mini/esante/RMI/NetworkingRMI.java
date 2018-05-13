@@ -24,37 +24,20 @@ public NetworkingRMI(){
            try {
         LocateRegistry.createRegistry(1099);
         serviceImp=new ImplimentationService();
-        Naming.rebind("rmi://localhost:1099/Servic", serviceImp);
+        Naming.rebind("rmi://localhost:1099/Service", serviceImp);
         System.out.println(serviceImp.toString());
     } catch (Exception ex) {
         Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
 
-    @Override
-    public void Send(Tiers p) {
-        
-    
-        
-    try {
-        stub = (Service)Naming.lookup("rmi://localhost:1099/Service");
-        stub.SetPrescription(p);
-    } catch (NotBoundException ex) {
-        Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (MalformedURLException ex) {
-        Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (RemoteException ex) {
-        Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        
-              
-    }
+
 
     @Override
     public String Connect(String name, String pass) {
      String result;
         try {
-        IAnnuair stub=(IAnnuair)Naming.lookup("rmi:/192.168.8.102:1099/Annuair");
+        IAnnuair stub=(IAnnuair)Naming.lookup("rmi:/192.168.8.101:1099/Annuair");
         result=stub.Login(pass, pass);
         return result;
                 } catch (NotBoundException ex) {
@@ -65,9 +48,37 @@ public NetworkingRMI(){
      return "";
     } 
 
+
     @Override
-    public void Send(Prescriptionentet p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void SendTiers(Tiers T) {
+           
+    try {
+        stub = (Service)Naming.lookup("rmi://192.168.8.101:1099/Service");
+        stub.SetTiers(T);
+    } catch (NotBoundException ex) {
+        Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (MalformedURLException ex) {
+        Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (RemoteException ex) {
+        Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
+
+    @Override
+    public void SendPrescription(Prescriptionentet p) {
+        
+        
+    try {
+        stub = (Service)Naming.lookup("rmi://192.168.8.101:1099/Service");
+        stub.SetPrescription(p);
+    } catch (NotBoundException ex) {
+        Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (MalformedURLException ex) {
+        Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (RemoteException ex) {
+        Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
     }
 
  

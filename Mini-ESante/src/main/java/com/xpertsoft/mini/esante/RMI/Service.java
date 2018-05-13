@@ -15,5 +15,6 @@ import java.rmi.RemoteException;
  * @author soufiane
  */
 public interface Service extends Remote{
-    public String SetPrescription(Tiers p) throws RemoteException;
+    public String SetPrescription(Prescriptionentet p) throws RemoteException;
+    public String SetTiers(Tiers p) throws RemoteException;
 }

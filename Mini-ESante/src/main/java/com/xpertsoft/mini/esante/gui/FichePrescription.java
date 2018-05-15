@@ -32,16 +32,13 @@ public class FichePrescription extends javax.swing.JDialog {
              MetierImplimentationTiers m=new MetierImplimentationTiers();
                 UTIL.RemplirComboBoxXD(jComboBoxAuteur, m.getALLTiers(), false, false);
                 UTIL.RemplirComboBoxXD(jComboBoxPatient, m.getALLTiers(), false, false);
-        switch(ModAppel){
+        switch(ModAppel){                                                                              
             case "Modifier":
+                RemplirChamps(prescription);
                 if(!prescription.equals(null)){
-                jTextFieldIdID.setText(String.valueOf(prescription.getCodePrescription()));
-                jXDatePickerDateNaissanc.setDate(prescription.getDatePrescription());
-                jTextAreaObservation.setText(prescription.getObservation());
-                jTextFieldOrganisation.setText(prescription.getOrganisation());
-                jTableDetalPrescription.setModel(new AbstractTableModelPrescriptionDetail(m.getDetailPrescription(prescription.getCodePrescription())));
-                jComboBoxAuteur.setSelectedItem(prescription.getAuteur());
-                jComboBoxPatient.setSelectedItem(prescription.getPatient());
+                    jTableDetalPrescription.setModel(
+                            new AbstractTableModelPrescriptionDetail(
+                                    m.getDetailPrescription(prescription.getCodePrescription())));
                 }
                 Setenabled(true);
                 break;
@@ -49,9 +46,25 @@ public class FichePrescription extends javax.swing.JDialog {
             case "Ajouter":
            
                 break;
+            case "Recever            ":
+                RemplirChamps(prescription);
+               AbstractTableModelPrescriptionDetail model=(AbstractTableModelPrescriptionDetail) jTableDetalPrescription.getModel();
+                while(prescription.getDetail().iterator().hasNext()){
+                model.addDetail(prescription.getDetail().iterator().next());
+                };
+                jButtonValider.setEnabled(false);
+                break;
         }
     }
-
+    public void RemplirChamps(Prescriptionentet p){
+                jTextFieldIdID.setText(String.valueOf(prescription.getCodePrescription()));
+                jXDatePickerDateNaissanc.setDate(prescription.getDatePrescription());
+                jTextAreaObservation.setText(prescription.getObservation());
+                jTextFieldOrganisation.setText(prescription.getOrganisation());
+             
+                jComboBoxAuteur.setSelectedItem(prescription.getAuteur());
+                jComboBoxPatient.setSelectedItem(prescription.getPatient());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -208,7 +221,7 @@ public class FichePrescription extends javax.swing.JDialog {
             }
         });
 
-        jButtonSend.setText("Envoiyer");
+        jButtonSend.setText("Fermer");
         jButtonSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSendActionPerformed(evt);
@@ -280,8 +293,8 @@ switch(ModAppel){
            prescription.setDatePrescription(jXDatePickerDateNaissanc.getDate());
            prescription.setObservation(jTextAreaObservation.getText());
            prescription.setOrganisation(jTextFieldOrganisation.getText());
-             prescription.setAuteur((Tiers)jComboBoxAuteur.getSelectedItem());
-             prescription.setPatient((Tiers)jComboBoxAuteur.getSelectedItem());
+           prescription.setAuteur((Tiers)jComboBoxAuteur.getSelectedItem());
+           prescription.setPatient((Tiers)jComboBoxAuteur.getSelectedItem());
            MetierImplimentationTiers m=new MetierImplimentationTiers();
            this.jTextFieldIdID.setText(String.valueOf(m.SaveOrUpdatePrescriptionEntet(prescription)));
            setEnabled(true);

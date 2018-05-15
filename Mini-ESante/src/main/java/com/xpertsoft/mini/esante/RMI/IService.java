@@ -17,4 +17,5 @@ import java.rmi.RemoteException;
 public interface IService extends Remote{
     public String SetPrescription(Prescriptionentet p) throws RemoteException;
     public String SetTiers(Tiers p) throws RemoteException;
+    public boolean DemmandeSolisitation()throws RemoteException;
 }

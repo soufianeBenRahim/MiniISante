@@ -68,7 +68,7 @@ public class menu extends javax.swing.JFrame  {
         jButtonAjouterTiers = new javax.swing.JButton();
         jButtonSupprimerTiers = new javax.swing.JButton();
         jButtonModifierTiers = new javax.swing.JButton();
-        jButtonGetPrescription = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         PannelPerspection = new javax.swing.JPanel();
         jScrollPaneTableProduit = new javax.swing.JScrollPane();
         jTablePRescription = new javax.swing.JTable();
@@ -78,6 +78,11 @@ public class menu extends javax.swing.JFrame  {
         jTablePrescriptionDetail = new javax.swing.JTable();
         jButtonEnvoiyerPrescription = new javax.swing.JButton();
         jButtonModifierPrescription = new javax.swing.JButton();
+        jButtonConnectClient = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldIPAdress = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jButtonResive = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("menu");
@@ -122,13 +127,6 @@ public class menu extends javax.swing.JFrame  {
             }
         });
 
-        jButtonGetPrescription.setText("Recever Prescription");
-        jButtonGetPrescription.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonGetPrescriptionActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout clientsLayout = new javax.swing.GroupLayout(clients);
         clients.setLayout(clientsLayout);
         clientsLayout.setHorizontalGroup(
@@ -136,30 +134,31 @@ public class menu extends javax.swing.JFrame  {
             .addGroup(clientsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(clientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPaneTableClient, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
                     .addGroup(clientsLayout.createSequentialGroup()
                         .addComponent(jButtonAjouterTiers)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonSupprimerTiers)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonModifierTiers)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonGetPrescription)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPaneTableClient, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE))
+                        .addGap(120, 120, 120)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         clientsLayout.setVerticalGroup(
             clientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(clientsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(clientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSupprimerTiers)
-                    .addComponent(jButtonAjouterTiers)
-                    .addComponent(jButtonModifierTiers)
-                    .addComponent(jButtonGetPrescription))
+                .addGroup(clientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(clientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonSupprimerTiers)
+                        .addComponent(jButtonAjouterTiers)
+                        .addComponent(jButtonModifierTiers)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneTableClient, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addComponent(jScrollPaneTableClient, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Tiers", clients);
@@ -225,6 +224,15 @@ public class menu extends javax.swing.JFrame  {
             }
         });
 
+        jButtonConnectClient.setText("Connecter");
+        jButtonConnectClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConnectClientActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Adress Destant :");
+
         javax.swing.GroupLayout PannelPerspectionLayout = new javax.swing.GroupLayout(PannelPerspection);
         PannelPerspection.setLayout(PannelPerspectionLayout);
         PannelPerspectionLayout.setHorizontalGroup(
@@ -233,16 +241,22 @@ public class menu extends javax.swing.JFrame  {
                 .addContainerGap()
                 .addGroup(PannelPerspectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneTableProduit1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+                    .addComponent(jScrollPaneTableProduit)
                     .addGroup(PannelPerspectionLayout.createSequentialGroup()
-                        .addComponent(jButtonAjouterPrescription)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonModifierPrescription)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonSupprimerPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonEnvoiyerPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPaneTableProduit))
+                        .addGroup(PannelPerspectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PannelPerspectionLayout.createSequentialGroup()
+                                .addComponent(jButtonAjouterPrescription)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonModifierPrescription)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonSupprimerPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PannelPerspectionLayout.createSequentialGroup()
+                                .addComponent(jButtonConnectClient)
+                                .addGap(35, 35, 35)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(91, 91, 91)
+                                .addComponent(jButtonEnvoiyerPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         PannelPerspectionLayout.setVerticalGroup(
@@ -252,10 +266,14 @@ public class menu extends javax.swing.JFrame  {
                 .addGroup(PannelPerspectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAjouterPrescription)
                     .addComponent(jButtonSupprimerPrescription)
-                    .addComponent(jButtonEnvoiyerPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonModifierPrescription))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneTableProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PannelPerspectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonConnectClient)
+                    .addComponent(jLabel2)
+                    .addComponent(jButtonEnvoiyerPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(9, 9, 9)
+                .addComponent(jScrollPaneTableProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPaneTableProduit1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -263,20 +281,44 @@ public class menu extends javax.swing.JFrame  {
 
         jTabbedPane.addTab("Prescription", PannelPerspection);
 
+        jTextFieldIPAdress.setText("192.168.8.101");
+
+        jLabel1.setText("Adresse Annuaire");
+
+        jButtonResive.setText("Recever");
+        jButtonResive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonResiveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldIPAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonResive)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldIPAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonResive))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -316,10 +358,10 @@ public class menu extends javax.swing.JFrame  {
         displayPrescription();
     }//GEN-LAST:event_jButtonSupprimerTiersActionPerformed
 
-    private void jButtonGetPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGetPrescriptionActionPerformed
+    private void jButtonResiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResiveActionPerformed
 if (Net==null) Net=new NetworkingRMI();
 Net.Recive();// TODO add your handling code here:
-    }//GEN-LAST:event_jButtonGetPrescriptionActionPerformed
+    }//GEN-LAST:event_jButtonResiveActionPerformed
 
     private void jButtonModifierTiersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifierTiersActionPerformed
         FicheTiers FP = new FicheTiers(this, true,"Modifier",(String) TableTiers.getValueAt(TableTiers.getSelectedRow(), 0));
@@ -351,6 +393,16 @@ this.displayPrescriptionDetail(value);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jTablePRescriptionMouseClicked
+
+    private void jButtonConnectClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectClientActionPerformed
+if(Net!=null){
+    Net.IPAnnuaire=jTextFieldIPAdress.getText();
+    LoginForm log=new LoginForm(this,true);
+    
+    log.setVisible(true);
+Net.Connect(log.name,log.Passs);
+}        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonConnectClientActionPerformed
     public static void main(String[] args) {
          // TODO code application logic here
          menu menu = new menu();
@@ -364,18 +416,23 @@ this.displayPrescriptionDetail(value);
     private javax.swing.JPanel clients;
     public javax.swing.JButton jButtonAjouterPrescription;
     public javax.swing.JButton jButtonAjouterTiers;
+    private javax.swing.JButton jButtonConnectClient;
     public javax.swing.JButton jButtonEnvoiyerPrescription;
-    public javax.swing.JButton jButtonGetPrescription;
     public javax.swing.JButton jButtonModifierPrescription;
     public javax.swing.JButton jButtonModifierTiers;
+    public javax.swing.JButton jButtonResive;
     public javax.swing.JButton jButtonSupprimerPrescription;
     public javax.swing.JButton jButtonSupprimerTiers;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPaneTableClient;
     private javax.swing.JScrollPane jScrollPaneTableProduit;
     private javax.swing.JScrollPane jScrollPaneTableProduit1;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTable jTablePRescription;
     private javax.swing.JTable jTablePrescriptionDetail;
+    private javax.swing.JTextField jTextFieldIPAdress;
     // End of variables declaration//GEN-END:variables
 
 }

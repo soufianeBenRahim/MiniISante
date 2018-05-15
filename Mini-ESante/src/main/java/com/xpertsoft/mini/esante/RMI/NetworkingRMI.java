@@ -19,33 +19,39 @@ public NetworkingRMI(){
  
 }
 
- 
+ public String IPAnnuaire;
+ public String IPServiceDestant;
     public void Recive() {
            try {
         LocateRegistry.createRegistry(1099);
         serviceImp=new ImplimentationService();
         Naming.rebind("rmi://localhost:1099/Service", serviceImp);
         System.out.println(serviceImp.toString());
-    } catch (Exception ex) {
+    } catch (RemoteException ex) {
         Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (MalformedURLException ex) {
+        Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+    } 
     }
-    }
 
 
 
 
-    public String Connect(String name, String pass) {
-     String result;
+    public boolean Connect(String name, String pass) {
+     boolean result=false;
         try {
-        IAnnuair stub=(IAnnuair)Naming.lookup("rmi:/192.168.8.101:1099/Annuair");
+        IAnnuair stub=(IAnnuair)Naming.lookup("rmi:/"+IPAnnuaire+":1099/Annuair");
         result=stub.Login(pass, pass);
+        this.Recive();
         return result;
                 } catch (NotBoundException ex) {
         Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (Exception ex) {
+    } catch (MalformedURLException ex) {
+        Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (RemoteException ex) {
         Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
     }
-     return "";
+     return result;
     } 
 
 
@@ -53,7 +59,7 @@ public NetworkingRMI(){
     public void SendTiers(Tiers T) {
            
     try {
-        stub = (IService)Naming.lookup("rmi://192.168.8.101:1099/Service");
+        stub = (IService)Naming.lookup("rmi://"+IPServiceDestant+":1099/Service");
         stub.SetTiers(T);
     } catch (NotBoundException ex) {
         Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,10 +71,9 @@ public NetworkingRMI(){
     }
 
     public void SendPrescription(Prescriptionentet p) {
-        
-        
+  
     try {
-        stub = (IService)Naming.lookup("rmi://192.168.8.101:1099/Service");
+        stub = (IService)Naming.lookup("rmi://"+IPServiceDestant+":1099/Service");
         stub.SetPrescription(p);
     } catch (NotBoundException ex) {
         Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);

@@ -52,7 +52,6 @@ public class MetierImplimentationTiers implements ImetierTiers {
          Tr.setDatenaissance(T.getDatenaissance());
          Tr.setNom(T.getNom());
          Tr.setPrenom(T.getPrenom());
-         Tr.setAmois(T.getAmois());
          
          session.merge(Tr);
             tx.commit();

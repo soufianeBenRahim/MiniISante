@@ -27,7 +27,6 @@ public class Tiers  implements java.io.Serializable {
 
      private String adress;
      private Date datenaissance;
-     private Boolean amois;
     private Set<Prescriptionentet> prescriptions=new HashSet<Prescriptionentet>();
     private Set<Prescriptionentet> Redigedprescriptions=new HashSet<Prescriptionentet>();
     public Tiers() {
@@ -44,13 +43,13 @@ public class Tiers  implements java.io.Serializable {
 
 	
  
-    public Tiers(String nss, String nom, String prenom, String adress, Date datenaissance, Boolean amois) {
+    public Tiers(String nss, String nom, String prenom, String adress, Date datenaissance) {
        this.nss = nss;
        this.nom = nom;
        this.prenom = prenom;
        this.adress = adress;
        this.datenaissance = datenaissance;
-       this.amois = amois;
+
     }
    
     public String getNss() {
@@ -88,16 +87,7 @@ public class Tiers  implements java.io.Serializable {
     public void setDatenaissance(Date datenaissance) {
         this.datenaissance = datenaissance;
     }
-    public Boolean getAmois() {
-        return this.amois;
-    }
-    
-    public void setAmois(Boolean amois) {
-        this.amois = amois;
-    }
-
-
-
+  
 
 }
 

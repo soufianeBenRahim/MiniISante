@@ -24,7 +24,7 @@ public class AbstractTableModelTiers extends AbstractTableModel {
  
         this.ListeTiers = ListeTiers;
 
-        entetes=new String[]{"N° SS","Nom","Prenom","Adress","Date Naissance","C'est mois"};
+        entetes=new String[]{"N° SS","Nom","Prenom","Adress","Date Naissance"};
     }
  @Override
     public int getRowCount() {
@@ -61,8 +61,7 @@ public Object getValueAt(int rowIndex, int columnIndex) {
                 return ListeTiers.get(rowIndex).getAdress();
             case 4:
                 return ListeTiers.get(rowIndex).getDatenaissance();
-            case 5:
-                return ListeTiers.get(rowIndex).getAmois();
+       
          
             default:
                 return null; //Ne devrait jamais arriver
@@ -85,8 +84,6 @@ public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
                  ListeTiers.get(rowIndex).setAdress((String) aValue);
             case 4:
                  ListeTiers.get(rowIndex).setDatenaissance((Date) aValue);
-            case 5:
-                 ListeTiers.get(rowIndex).setAmois((boolean) aValue);
            
             default:
         }

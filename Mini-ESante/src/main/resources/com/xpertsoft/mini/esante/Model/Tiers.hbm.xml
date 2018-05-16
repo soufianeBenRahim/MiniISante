@@ -20,10 +20,7 @@
         <property name="datenaissance" type="date">
             <column name="DATENAISSANCE" length="10" />
         </property>
-        <property name="amois" type="java.lang.Boolean">
-            <column name="AMOIS" />
-        </property>
-           <set name="prescriptions" inverse="true" cascade="all">
+            <set name="prescriptions" inverse="true" cascade="all">
             <key column="CODE_PATIENT" not-null="true" />
             <one-to-many class="com.xpertsoft.mini.esante.Model.Prescriptionentet"/>
              </set>  

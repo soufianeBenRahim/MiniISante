@@ -15,10 +15,7 @@ import java.rmi.RemoteException;
  * @author Soufiane
  */
 public interface IAnnuair extends Remote{
-     
     public boolean Login(String Psudo,String Pass) throws RemoteException;
     public void Desconect(String Psudo,String Pass) throws RemoteException;
-    public String createAccont(String Psudo,String Pass) throws RemoteException;
-    public void DelletAccont(String Psudo)throws RemoteException;
     public String GetIPUser(String Psudo) throws RemoteException;
 }

@@ -19,6 +19,18 @@ import jdk.nashorn.internal.objects.NativeArray;
  * @author soufiane
  */
 public class UTIL {
+        public int GetIndexByID(JComboBox CB, String ID) {
+        int max = CB.getItemCount();
+        int compteur = 0;
+        for (compteur = 0; compteur < max - 1; compteur++) {
+            if (((String[]) CB.getItemAt(compteur))[0].equals(ID)) {
+                break;
+            }
+        }
+        CB.setSelectedIndex(compteur);
+        return compteur;
+    }
+        
         public static void RemplirComboBoxXD(JComboBox CB, List<Tiers>  ListTiers, Boolean AjouterTout, Boolean AvecNull) {
         CB.removeAllItems();
 

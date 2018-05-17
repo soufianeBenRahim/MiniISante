@@ -39,8 +39,8 @@ public NetworkingRMI(){
 
     public boolean Connect(String name, String pass) {
      boolean result=false;
-        try {
-        IAnnuair stub=(IAnnuair)Naming.lookup("rmi:/"+IPAnnuaire+":1099/Annuair");
+        try {    
+        IAnnuair stub=(IAnnuair)Naming.lookup("rmi://"+IPAnnuaire+":1099/Annuair");
         result=stub.Login(pass, pass);
         this.Recive();
         return result;

@@ -360,7 +360,13 @@ public class menu extends javax.swing.JFrame  {
 
     private void jButtonResiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResiveActionPerformed
 if (Net==null) Net=new NetworkingRMI();
-Net.Recive();// TODO add your handling code here:
+Net.IPAnnuaire=jTextFieldIPAdress.getText();
+LoginForm lf=new LoginForm(this,true);
+lf.setVisible(true);
+
+Net.Connect(lf.name, lf.Passs);
+
+// TODO add your handling code here:
     }//GEN-LAST:event_jButtonResiveActionPerformed
 
     private void jButtonModifierTiersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifierTiersActionPerformed

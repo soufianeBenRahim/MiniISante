@@ -1,20 +1,22 @@
 package com.xpertsoft.mini.esante.gui;
 
 import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
+import com.xpertsoft.mini.esante.Model.PrescriptionDetail;
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
-import com.xpertsoft.mini.esante.Model.Tiers;
+
 
 import com.xpertsoft.mini.esante.RMI.NetworkingRMI;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Soufiane
  */
 public class menu extends javax.swing.JFrame  {
-
+private String name;
+private String pass;
     /**
      * Creates new form menu
      */
@@ -82,7 +84,8 @@ public class menu extends javax.swing.JFrame  {
         jLabel2 = new javax.swing.JLabel();
         jTextFieldIPAdress = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButtonResive = new javax.swing.JButton();
+        jButtonConnectAnnuaire = new javax.swing.JButton();
+        jButtonDeconnectAnnuair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("menu");
@@ -285,10 +288,18 @@ public class menu extends javax.swing.JFrame  {
 
         jLabel1.setText("Adresse Annuaire");
 
-        jButtonResive.setText("Recever");
-        jButtonResive.addActionListener(new java.awt.event.ActionListener() {
+        jButtonConnectAnnuaire.setText("Connection a l'annuaire");
+        jButtonConnectAnnuaire.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonResiveActionPerformed(evt);
+                jButtonConnectAnnuaireActionPerformed(evt);
+            }
+        });
+
+        jButtonDeconnectAnnuair.setText("Déconnection");
+        jButtonDeconnectAnnuair.setEnabled(false);
+        jButtonDeconnectAnnuair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeconnectAnnuairActionPerformed(evt);
             }
         });
 
@@ -305,7 +316,9 @@ public class menu extends javax.swing.JFrame  {
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldIPAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonResive)
+                        .addComponent(jButtonConnectAnnuaire)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonDeconnectAnnuair)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -316,7 +329,8 @@ public class menu extends javax.swing.JFrame  {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldIPAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonResive))
+                    .addComponent(jButtonConnectAnnuaire)
+                    .addComponent(jButtonDeconnectAnnuair))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -333,11 +347,12 @@ public class menu extends javax.swing.JFrame  {
     }//GEN-LAST:event_jButtonSupprimerPrescriptionActionPerformed
 
     private void jButtonEnvoiyerPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoiyerPrescriptionActionPerformed
-       if (Net==null) Net=new NetworkingRMI();
+       if (Net==null) Net=new NetworkingRMI(this);
         int ID=(int) jTablePRescription.getValueAt(jTablePRescription.getSelectedRow(),0);
         MetierImplimentationTiers m = new MetierImplimentationTiers();
         Prescriptionentet p=m.GetPrescriptionentetByID(ID);
-        Net.SendPrescription(p);
+        List<PrescriptionDetail> detail=m.getDetailPrescription(p.getCodePrescription());
+        Net.SendPrescription(p,detail);
 // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEnvoiyerPrescriptionActionPerformed
 
@@ -358,16 +373,25 @@ public class menu extends javax.swing.JFrame  {
         displayPrescription();
     }//GEN-LAST:event_jButtonSupprimerTiersActionPerformed
 
-    private void jButtonResiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResiveActionPerformed
-if (Net==null) Net=new NetworkingRMI();
+    private void jButtonConnectAnnuaireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectAnnuaireActionPerformed
+if (Net==null) Net=new NetworkingRMI(this);
 Net.IPAnnuaire=jTextFieldIPAdress.getText();
 LoginForm lf=new LoginForm(this,true);
 lf.setVisible(true);
 
-Net.Connect(lf.name, lf.Passs);
+if(Net.Connect(lf.name, lf.Passs)){
+    this.name=lf.name;
+    this.pass=lf.Passs;
+    this.jButtonConnectAnnuaire.setEnabled(false);
+    this.jButtonDeconnectAnnuair.setEnabled(true);
+    JOptionPane.showMessageDialog(this, "Connexion avec succès");
+    }else{
+         JOptionPane.showMessageDialog(this, "connection a l'annuaire echoué");
+
+        }
 
 // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonResiveActionPerformed
+    }//GEN-LAST:event_jButtonConnectAnnuaireActionPerformed
 
     private void jButtonModifierTiersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifierTiersActionPerformed
         FicheTiers FP = new FicheTiers(this, true,"Modifier",(String) TableTiers.getValueAt(TableTiers.getSelectedRow(), 0));
@@ -409,6 +433,22 @@ if(Net!=null){
 Net.Connect(log.name,log.Passs);
 }        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonConnectClientActionPerformed
+
+    private void jButtonDeconnectAnnuairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeconnectAnnuairActionPerformed
+if (Net==null) Net=new NetworkingRMI(this);
+Net.IPAnnuaire=jTextFieldIPAdress.getText();
+if(Net.Deconnect(this.name,this.pass)){
+    this.jButtonConnectAnnuaire.setEnabled(true);
+    this.jButtonDeconnectAnnuair.setEnabled(false);
+}else{
+         JOptionPane.showMessageDialog(this, "déconnection a l'annuaire echoué");
+
+        }
+
+    
+   
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButtonDeconnectAnnuairActionPerformed
     public static void main(String[] args) {
          // TODO code application logic here
          menu menu = new menu();
@@ -422,11 +462,12 @@ Net.Connect(log.name,log.Passs);
     private javax.swing.JPanel clients;
     public javax.swing.JButton jButtonAjouterPrescription;
     public javax.swing.JButton jButtonAjouterTiers;
+    public javax.swing.JButton jButtonConnectAnnuaire;
     private javax.swing.JButton jButtonConnectClient;
+    private javax.swing.JButton jButtonDeconnectAnnuair;
     public javax.swing.JButton jButtonEnvoiyerPrescription;
     public javax.swing.JButton jButtonModifierPrescription;
     public javax.swing.JButton jButtonModifierTiers;
-    public javax.swing.JButton jButtonResive;
     public javax.swing.JButton jButtonSupprimerPrescription;
     public javax.swing.JButton jButtonSupprimerTiers;
     private javax.swing.JLabel jLabel1;

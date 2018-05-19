@@ -5,17 +5,19 @@
  */
 package com.xpertsoft.mini.esante.RMI;
 
+import com.xpertsoft.mini.esante.Model.PrescriptionDetail;
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
 import com.xpertsoft.mini.esante.Model.Tiers;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 /**
  *
  * @author soufiane
  */
 public interface IService extends Remote{
-    public String SetPrescription(Prescriptionentet p) throws RemoteException;
+    public String SetPrescription(Prescriptionentet p,List<PrescriptionDetail> detail) throws RemoteException;
     public String SetTiers(Tiers p) throws RemoteException;
     public boolean DemmandeSolisitation()throws RemoteException;
 }

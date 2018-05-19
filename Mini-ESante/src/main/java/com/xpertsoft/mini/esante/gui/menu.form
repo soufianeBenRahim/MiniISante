@@ -35,7 +35,9 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jTextFieldIPAdress" min="-2" pref="96" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButtonResive" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonConnectAnnuaire" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButtonDeconnectAnnuair" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -50,7 +52,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldIPAdress" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonResive" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonConnectAnnuaire" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonDeconnectAnnuair" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jTabbedPane" min="-2" pref="635" max="-2" attributes="0"/>
@@ -367,16 +370,25 @@
         <Property name="text" type="java.lang.String" value="Adresse Annuaire"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonResive">
+    <Component class="javax.swing.JButton" name="jButtonConnectAnnuaire">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Recever"/>
+        <Property name="text" type="java.lang.String" value="Connection a l&apos;annuaire"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonResiveActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonConnectAnnuaireActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonDeconnectAnnuair">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="D&#xe9;connection"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDeconnectAnnuairActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

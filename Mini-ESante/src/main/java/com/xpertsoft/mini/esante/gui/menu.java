@@ -87,6 +87,7 @@ private String pass;
         jLabel1 = new javax.swing.JLabel();
         jButtonConnectAnnuaire = new javax.swing.JButton();
         jButtonDeconnectAnnuair = new javax.swing.JButton();
+        jButtonRecever = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("menu");
@@ -309,6 +310,13 @@ private String pass;
             }
         });
 
+        jButtonRecever.setText("Recever");
+        jButtonRecever.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReceverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -325,6 +333,8 @@ private String pass;
                         .addComponent(jButtonConnectAnnuaire)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonDeconnectAnnuair)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonRecever)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -336,7 +346,8 @@ private String pass;
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldIPAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConnectAnnuaire)
-                    .addComponent(jButtonDeconnectAnnuair))
+                    .addComponent(jButtonDeconnectAnnuair)
+                    .addComponent(jButtonRecever))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -354,6 +365,7 @@ private String pass;
 
     private void jButtonEnvoiyerPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoiyerPrescriptionActionPerformed
        if (Net==null) Net=new NetworkingRMI(this);
+       Net.IPServiceDestant=jTextFieldIPDeestant.getText();
         int ID=(int) jTablePRescription.getValueAt(jTablePRescription.getSelectedRow(),0);
         MetierImplimentationTiers m = new MetierImplimentationTiers();
         Prescriptionentet p=m.GetPrescriptionentetByID(ID);
@@ -462,6 +474,11 @@ if(Net.Deconnect(this.name,this.pass)){
    
 // TODO add your handling code here:
     }//GEN-LAST:event_jButtonDeconnectAnnuairActionPerformed
+
+    private void jButtonReceverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReceverActionPerformed
+if (Net==null) Net=new NetworkingRMI(this);
+Net.Recive();// TODO add your handling code here:
+    }//GEN-LAST:event_jButtonReceverActionPerformed
     public static void main(String[] args) {
          // TODO code application logic here
          menu menu = new menu();
@@ -481,6 +498,7 @@ if(Net.Deconnect(this.name,this.pass)){
     public javax.swing.JButton jButtonEnvoiyerPrescription;
     public javax.swing.JButton jButtonModifierPrescription;
     public javax.swing.JButton jButtonModifierTiers;
+    private javax.swing.JButton jButtonRecever;
     public javax.swing.JButton jButtonSupprimerPrescription;
     public javax.swing.JButton jButtonSupprimerTiers;
     private javax.swing.JLabel jLabel1;

@@ -75,7 +75,7 @@ public class NetworkingRMI {
     }
     public void GetAnnuere() {
         try {
-            stubAnnuair = (IAnnuair) Naming.lookup("rmi://" + IPAnnuaire + ":1099/Annuair");
+            stubAnnuair = (IAnnuair) Naming.lookup("rmi://" + IPAnnuaire + ":1090/Annuair");
         } catch (Exception ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
         } 

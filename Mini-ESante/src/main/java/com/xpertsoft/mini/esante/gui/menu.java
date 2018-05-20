@@ -428,9 +428,8 @@ this.displayPrescriptionDetail(value);
 if(Net!=null){
     Net.IPAnnuaire=jTextFieldIPAdress.getText();
     LoginForm log=new LoginForm(this,true);
-    
     log.setVisible(true);
-Net.Connect(log.name,log.Passs);
+    Net.Connect(log.name,log.Passs);
 }        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonConnectClientActionPerformed
 

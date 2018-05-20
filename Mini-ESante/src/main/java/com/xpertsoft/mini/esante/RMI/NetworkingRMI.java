@@ -8,6 +8,7 @@ import com.xpertsoft.mini.esante.gui.menu;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.List;
@@ -26,7 +27,18 @@ public class NetworkingRMI {
 
     public String IPAnnuaire;
     public String IPServiceDestant;
-
+public void EndRecive(){
+   
+        try {
+            Naming.unbind("rmi://localhost:1099/Service");
+        } catch (RemoteException ex) {
+            Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NotBoundException ex) {
+            Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
     public void Recive() {
         try {
             LocateRegistry.createRegistry(1099);

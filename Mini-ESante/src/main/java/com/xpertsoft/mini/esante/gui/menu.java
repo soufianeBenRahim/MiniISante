@@ -88,6 +88,7 @@ private String pass;
         jButtonConnectAnnuaire = new javax.swing.JButton();
         jButtonDeconnectAnnuair = new javax.swing.JButton();
         jButtonRecever = new javax.swing.JButton();
+        jButtonEndRecive = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("menu");
@@ -317,6 +318,14 @@ private String pass;
             }
         });
 
+        jButtonEndRecive.setText("Fin Reception");
+        jButtonEndRecive.setEnabled(false);
+        jButtonEndRecive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEndReciveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -335,6 +344,8 @@ private String pass;
                         .addComponent(jButtonDeconnectAnnuair)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonRecever)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonEndRecive)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -347,7 +358,8 @@ private String pass;
                     .addComponent(jTextFieldIPAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConnectAnnuaire)
                     .addComponent(jButtonDeconnectAnnuair)
-                    .addComponent(jButtonRecever))
+                    .addComponent(jButtonRecever)
+                    .addComponent(jButtonEndRecive))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -477,8 +489,16 @@ if(Net.Deconnect(this.name,this.pass)){
 
     private void jButtonReceverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReceverActionPerformed
 if (Net==null) Net=new NetworkingRMI(this);
-Net.Recive();// TODO add your handling code here:
+Net.Recive();
+jButtonRecever.setEnabled(false);
+jButtonEndRecive.setEnabled(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButtonReceverActionPerformed
+
+    private void jButtonEndReciveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEndReciveActionPerformed
+Net.EndRecive();
+jButtonRecever.setEnabled(true);
+jButtonEndRecive.setEnabled(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEndReciveActionPerformed
     public static void main(String[] args) {
          // TODO code application logic here
          menu menu = new menu();
@@ -495,6 +515,7 @@ Net.Recive();// TODO add your handling code here:
     public javax.swing.JButton jButtonConnectAnnuaire;
     private javax.swing.JButton jButtonConnectClient;
     private javax.swing.JButton jButtonDeconnectAnnuair;
+    private javax.swing.JButton jButtonEndRecive;
     public javax.swing.JButton jButtonEnvoiyerPrescription;
     public javax.swing.JButton jButtonModifierPrescription;
     public javax.swing.JButton jButtonModifierTiers;

@@ -25,7 +25,7 @@
           <many-to-one name="Patient" class="com.xpertsoft.mini.esante.Model.Tiers"
           column="CODE_PATIENT" not-null="true"  lazy ="false"/>
           
-            <set name="detail" inverse="true" cascade="all">
+            <set name="detail" inverse="true" cascade="all" lazy ="false">
             <key column="CODE_PRESPECTION" not-null="true" />
             <one-to-many class="com.xpertsoft.mini.esante.Model.PrescriptionDetail"  />
             </set>

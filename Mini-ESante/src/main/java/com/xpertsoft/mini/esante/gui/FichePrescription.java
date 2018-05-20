@@ -46,7 +46,7 @@ public class FichePrescription extends javax.swing.JDialog {
             case "Ajouter":
            
                 break;
-            case "Recever            ":
+            case "Recever":
                 RemplirChamps(prescription);
                AbstractTableModelPrescriptionDetail model=(AbstractTableModelPrescriptionDetail) jTableDetalPrescription.getModel();
                 while(prescription.getDetail().iterator().hasNext()){

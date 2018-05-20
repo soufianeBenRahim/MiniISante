@@ -31,7 +31,7 @@ public class NetworkingRMI {
         try {
             LocateRegistry.createRegistry(1099);
             if (serviceImp == null) {
-                serviceImp = new ImplimentationService();
+                serviceImp = new ImplimentationService(menu);
             }
             Naming.rebind("rmi://localhost:1099/Service", serviceImp);
             System.out.println(serviceImp.toString());

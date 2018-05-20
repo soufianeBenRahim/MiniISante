@@ -82,6 +82,7 @@ private String pass;
         jButtonModifierPrescription = new javax.swing.JButton();
         jButtonConnectClient = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jTextFieldIPDeestant = new javax.swing.JTextField();
         jTextFieldIPAdress = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButtonConnectAnnuaire = new javax.swing.JButton();
@@ -236,6 +237,8 @@ private String pass;
 
         jLabel2.setText("Adress Destant :");
 
+        jTextFieldIPDeestant.setEnabled(false);
+
         javax.swing.GroupLayout PannelPerspectionLayout = new javax.swing.GroupLayout(PannelPerspection);
         PannelPerspection.setLayout(PannelPerspectionLayout);
         PannelPerspectionLayout.setHorizontalGroup(
@@ -256,8 +259,10 @@ private String pass;
                             .addGroup(PannelPerspectionLayout.createSequentialGroup()
                                 .addComponent(jButtonConnectClient)
                                 .addGap(35, 35, 35)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(89, 89, 89)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextFieldIPDeestant, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jButtonEnvoiyerPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -274,7 +279,8 @@ private String pass;
                 .addGroup(PannelPerspectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConnectClient)
                     .addComponent(jLabel2)
-                    .addComponent(jButtonEnvoiyerPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonEnvoiyerPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldIPDeestant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPaneTableProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -427,12 +433,18 @@ this.displayPrescriptionDetail(value);
     }//GEN-LAST:event_jTablePRescriptionMouseClicked
 
     private void jButtonConnectClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectClientActionPerformed
-if(Net!=null){
-    Net.IPAnnuaire=jTextFieldIPAdress.getText();
-    LoginForm log=new LoginForm(this,true);
-    log.setVisible(true);
-    Net.Connect(log.name,log.Passs);
-}        // TODO add your handling code here:
+if (Net==null) Net=new NetworkingRMI(this);
+        Net.IPAnnuaire=jTextFieldIPAdress.getText();
+GetIPForm IF=new GetIPForm(this,true);
+IF.setVisible(true);
+if(IF.connect){
+if(IF.choix==1){
+    jTextFieldIPDeestant.setText(Net.GetIPUser(IF.Psudo));
+
+}else{
+jTextFieldIPDeestant.setText(IF.IP);
+}
+} 
     }//GEN-LAST:event_jButtonConnectClientActionPerformed
 
     private void jButtonDeconnectAnnuairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeconnectAnnuairActionPerformed
@@ -481,6 +493,7 @@ if(Net.Deconnect(this.name,this.pass)){
     private javax.swing.JTable jTablePRescription;
     private javax.swing.JTable jTablePrescriptionDetail;
     private javax.swing.JTextField jTextFieldIPAdress;
+    private javax.swing.JTextField jTextFieldIPDeestant;
     // End of variables declaration//GEN-END:variables
 
 }

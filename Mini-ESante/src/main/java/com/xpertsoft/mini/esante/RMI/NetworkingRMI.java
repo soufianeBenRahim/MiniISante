@@ -41,7 +41,17 @@ public class NetworkingRMI {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+   public String GetIPUser(String Psudo) {
+        
+        try {
+            GetAnnuere();
+            return stubAnnuair.GetIPUser(Psudo);
+           
+           } catch (Exception ex) {
+            Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return null;
+    }
     public boolean Connect(String name, String pass) {
         boolean result = false;
         try {

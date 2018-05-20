@@ -432,7 +432,7 @@ if(Net.Connect(lf.name, lf.Passs)){
     }//GEN-LAST:event_jButtonModifierTiersActionPerformed
 
     private void jButtonAjouterPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterPrescriptionActionPerformed
-        FichePrescription FP = new FichePrescription(this, true,"Ajouter",new Prescriptionentet());
+        FichePrescription FP = new FichePrescription(this, true,"Ajouter",new Prescriptionentet(),null);
         FP.setVisible(true); 
         this.displayPrescription();  
         
@@ -441,7 +441,9 @@ if(Net.Connect(lf.name, lf.Passs)){
 
     private void jButtonModifierPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifierPrescriptionActionPerformed
         MetierImplimentationTiers m = new MetierImplimentationTiers();
-        FichePrescription FP = new FichePrescription(this, true,"Modifier",m.GetPrescriptionentetByID((int)jTablePRescription.getValueAt(jTablePRescription.getSelectedRow(), 0)));
+        Prescriptionentet p =m.GetPrescriptionentetByID((int)jTablePRescription.getValueAt(jTablePRescription.getSelectedRow(), 0));
+        
+        FichePrescription FP = new FichePrescription(this, true,"Modifier",p,null);
         FP.setVisible(true); 
         this.displayPrescription();  
     }//GEN-LAST:event_jButtonModifierPrescriptionActionPerformed

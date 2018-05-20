@@ -28,7 +28,7 @@ menu menu;
 }
    @Override
     public String SetPrescription(Prescriptionentet p,List<PrescriptionDetail> detail) throws RemoteException {
-        FichePrescription pf=new FichePrescription(menu, true, "Recever", p);
+        FichePrescription pf=new FichePrescription(menu, true, "Recever", p,detail);
         pf.setVisible(true);
         return "OK"; //To change body of generated methods, choose Tools | Templates.
     }

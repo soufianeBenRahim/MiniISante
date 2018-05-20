@@ -25,7 +25,7 @@ public class FichePrescription extends javax.swing.JDialog {
      */
     String ModAppel;
     Prescriptionentet prescription;
-    public FichePrescription(java.awt.Frame parent, boolean modal,String _ModAppel,Prescriptionentet _p) {
+    public FichePrescription(java.awt.Frame parent, boolean modal,String _ModAppel,Prescriptionentet _p,List<PrescriptionDetail> detail) {
         super(parent, modal);
         initComponents();
         ModAppel=_ModAppel;
@@ -49,10 +49,6 @@ public class FichePrescription extends javax.swing.JDialog {
                 break;
             case "Recever":
                 RemplirChamps(prescription);
-                List<PrescriptionDetail> detail=new ArrayList<PrescriptionDetail>();
-                while(prescription.getDetail().iterator().hasNext()){
-                detail.add(prescription.getDetail().iterator().next());
-                };
                 this.jTableDetalPrescription.setModel(new AbstractTableModelPrescriptionDetail(detail));
                 jButtonValider.setEnabled(false);
                 break;

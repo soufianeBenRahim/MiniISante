@@ -9,6 +9,7 @@ import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
 import com.xpertsoft.mini.esante.Model.PrescriptionDetail;
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
 import com.xpertsoft.mini.esante.Model.Tiers;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -48,10 +49,11 @@ public class FichePrescription extends javax.swing.JDialog {
                 break;
             case "Recever":
                 RemplirChamps(prescription);
-           //    AbstractTableModelPrescriptionDetail model=(AbstractTableModelPrescriptionDetail) jTableDetalPrescription.getModel();
-                 //while(prescription.getDetail().iterator().hasNext()){
-                //model.addDetail(prescription.getDetail().iterator().next());
-               // };
+                List<PrescriptionDetail> detail=new ArrayList<PrescriptionDetail>();
+                while(prescription.getDetail().iterator().hasNext()){
+                detail.add(prescription.getDetail().iterator().next());
+                };
+                this.jTableDetalPrescription.setModel(new AbstractTableModelPrescriptionDetail(detail));
                 jButtonValider.setEnabled(false);
                 break;
         }

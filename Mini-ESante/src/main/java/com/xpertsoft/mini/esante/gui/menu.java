@@ -378,7 +378,7 @@ if (Net==null) Net=new NetworkingRMI(this);
 Net.IPAnnuaire=jTextFieldIPAdress.getText();
 LoginForm lf=new LoginForm(this,true);
 lf.setVisible(true);
-
+if(lf.connct){
 if(Net.Connect(lf.name, lf.Passs)){
     this.name=lf.name;
     this.pass=lf.Passs;
@@ -389,6 +389,8 @@ if(Net.Connect(lf.name, lf.Passs)){
          JOptionPane.showMessageDialog(this, "connection a l'annuaire echoué");
 
         }
+}
+
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jButtonConnectAnnuaireActionPerformed

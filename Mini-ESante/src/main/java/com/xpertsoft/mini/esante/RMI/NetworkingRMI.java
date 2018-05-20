@@ -45,9 +45,7 @@ public class NetworkingRMI {
     public boolean Connect(String name, String pass) {
         boolean result = false;
         try {
-            if (stubAnnuair == null) {
-                GetAnnuere();
-            }
+            GetAnnuere();
             result = stubAnnuair.Login(name, pass);
             return result;
            } catch (RemoteException ex) {
@@ -58,9 +56,7 @@ public class NetworkingRMI {
    public boolean Deconnect(String name, String pass) {
         
         try {
-            if (stubAnnuair == null) {
-                GetAnnuere();
-            }
+            GetAnnuere();
             return stubAnnuair.Desconect(name, pass);
            } catch (RemoteException ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
@@ -86,7 +82,7 @@ public class NetworkingRMI {
 
     public void SendTiers(Tiers T) {
         try {
-            if (stubServiceDestant==null)GetServiceDestant();
+            GetServiceDestant();
             stubServiceDestant.SetTiers(T);
         } catch (Exception ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,7 +91,7 @@ public class NetworkingRMI {
 
     public void SendPrescription(Prescriptionentet p,List<PrescriptionDetail> detail) {
         try {
-            if (stubServiceDestant==null)GetServiceDestant();
+            GetServiceDestant();
             stubServiceDestant.SetPrescription(p,detail);
         } catch (Exception ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);

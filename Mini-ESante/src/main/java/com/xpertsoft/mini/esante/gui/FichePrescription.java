@@ -48,10 +48,10 @@ public class FichePrescription extends javax.swing.JDialog {
                 break;
             case "Recever":
                 RemplirChamps(prescription);
-               AbstractTableModelPrescriptionDetail model=(AbstractTableModelPrescriptionDetail) jTableDetalPrescription.getModel();
-                while(prescription.getDetail().iterator().hasNext()){
-                model.addDetail(prescription.getDetail().iterator().next());
-                };
+           //    AbstractTableModelPrescriptionDetail model=(AbstractTableModelPrescriptionDetail) jTableDetalPrescription.getModel();
+                 //while(prescription.getDetail().iterator().hasNext()){
+                //model.addDetail(prescription.getDetail().iterator().next());
+               // };
                 jButtonValider.setEnabled(false);
                 break;
         }

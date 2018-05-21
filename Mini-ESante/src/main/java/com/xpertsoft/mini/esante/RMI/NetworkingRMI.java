@@ -102,16 +102,7 @@ public void EndRecive(){
         } 
     }
 
-    public void SendTiers(Tiers T) {
-        try {
-            GetServiceDestant();
-            stubServiceDestant.SetTiers(T);
-        } catch (Exception ex) {
-            Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void SendPrescription(Prescriptionentet p,List<PrescriptionDetail> detail) {
+     public void SendPrescription(Prescriptionentet p,List<PrescriptionDetail> detail) {
         try {
             GetServiceDestant();
             stubServiceDestant.SetPrescription(p,detail);

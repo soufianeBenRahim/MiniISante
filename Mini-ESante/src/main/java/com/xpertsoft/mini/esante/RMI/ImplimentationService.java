@@ -33,11 +33,7 @@ menu menu;
         return "OK"; //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public String SetTiers(Tiers p) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+ 
     @Override
     public boolean DemmandeSolisitation() throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -18,5 +18,5 @@ import java.util.List;
  */
 public interface IService extends Remote{
     public String SetPrescription(Prescriptionentet p,List<PrescriptionDetail> detail) throws RemoteException;
-    public boolean DemmandeSolisitation()throws RemoteException;
+    public void DemmandeSolisitation(String Message)throws RemoteException;
 }

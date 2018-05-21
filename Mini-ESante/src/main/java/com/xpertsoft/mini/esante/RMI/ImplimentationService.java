@@ -13,7 +13,10 @@ import com.xpertsoft.mini.esante.gui.menu;
 
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
+import java.security.cert.PKIXRevocationChecker;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.text.html.Option;
 
 
 /**
@@ -28,15 +31,28 @@ menu menu;
 }
    @Override
     public String SetPrescription(Prescriptionentet p,List<PrescriptionDetail> detail) throws RemoteException {
-        FichePrescription pf=new FichePrescription(menu, true, "Recever", p,detail);
+        int result=JOptionPane.showConfirmDialog(menu, "Accuse de reception","Une Prescription vien d'etre arrivee voulez vous le voir",JOptionPane.YES_NO_OPTION);
+        if(JOptionPane.YES_OPTION==result){
+        FichePrescription pf=new FichePrescription(menu, false, "Recever", p,detail);
         pf.setVisible(true);
-        return "OK"; //To change body of generated methods, choose Tools | Templates.
+        return "OK"; 
+        }else {
+            return "No";
+        }
     }
 
  
     @Override
-    public boolean DemmandeSolisitation() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void DemmandeSolisitation(String Message) throws RemoteException {
+        try {
+            String IP = getClientHost();
+            int result=JOptionPane.showConfirmDialog(menu,"Solisitation" , Message, JOptionPane.YES_NO_OPTION);
+            if(result==JOptionPane.YES_OPTION){
+            menu.SetIPDestant(IP);
+            }
+        } catch (Exception e) {
+
+        }
     }
-    
+
 }

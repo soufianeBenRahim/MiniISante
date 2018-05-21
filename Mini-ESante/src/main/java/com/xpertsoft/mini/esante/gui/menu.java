@@ -31,7 +31,9 @@ private String pass;
         displayTiers();
         displayPrescription();
     }
-    
+    public void SetIPDestant(String IP){
+    this.jTextFieldIPDeestant.setText(IP);
+    }
     private void displayTiers() {
          MetierImplimentationTiers impTiers=new MetierImplimentationTiers();
     this.TableTiers.setModel(new AbstractTableModelTiers(impTiers.getALLTiers()));

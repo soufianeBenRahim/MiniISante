@@ -31,7 +31,7 @@ menu menu;
 }
    @Override
     public String SetPrescription(Prescriptionentet p,List<PrescriptionDetail> detail) throws RemoteException {
-        int result=JOptionPane.showConfirmDialog(menu, "Accuse de reception","Une Prescription vien d'etre arrivee voulez vous le voir",JOptionPane.YES_NO_OPTION);
+        int result=JOptionPane.showConfirmDialog(menu,"Une Prescription vien d'etre arrivee voulez vous le voir", "Accuse de reception", JOptionPane.YES_NO_OPTION);
         if(JOptionPane.YES_OPTION==result){
         FichePrescription pf=new FichePrescription(menu, false, "Recever", p,detail);
         pf.setVisible(true);
@@ -46,7 +46,7 @@ menu menu;
     public void DemmandeSolisitation(String Message) throws RemoteException {
         try {
             String IP = getClientHost();
-            int result=JOptionPane.showConfirmDialog(menu,"Solisitation" , Message, JOptionPane.YES_NO_OPTION);
+            int result=JOptionPane.showConfirmDialog(menu, Message,"Solisitation" , JOptionPane.YES_NO_OPTION);
             if(result==JOptionPane.YES_OPTION){
             menu.SetIPDestant(IP);
             }

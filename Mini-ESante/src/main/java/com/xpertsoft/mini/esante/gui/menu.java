@@ -85,6 +85,7 @@ private String pass;
         jButtonConnectClient = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldIPDeestant = new javax.swing.JTextField();
+        jButtonSolliciter = new javax.swing.JButton();
         jTextFieldIPAdress = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButtonConnectAnnuaire = new javax.swing.JButton();
@@ -243,6 +244,13 @@ private String pass;
 
         jTextFieldIPDeestant.setEnabled(false);
 
+        jButtonSolliciter.setText("solliciter un  médecin");
+        jButtonSolliciter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSolliciterActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PannelPerspectionLayout = new javax.swing.GroupLayout(PannelPerspection);
         PannelPerspection.setLayout(PannelPerspectionLayout);
         PannelPerspectionLayout.setHorizontalGroup(
@@ -259,7 +267,9 @@ private String pass;
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldIPDeestant, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldIPDeestant, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonSolliciter))
                             .addGroup(PannelPerspectionLayout.createSequentialGroup()
                                 .addComponent(jButtonAjouterPrescription)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -278,7 +288,8 @@ private String pass;
                 .addGroup(PannelPerspectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConnectClient)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldIPDeestant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldIPDeestant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSolliciter))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PannelPerspectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAjouterPrescription)
@@ -503,6 +514,17 @@ Net.EndRecive();
 jButtonRecever.setEnabled(true);
 jButtonEndRecive.setEnabled(false);        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEndReciveActionPerformed
+
+    private void jButtonSolliciterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSolliciterActionPerformed
+   
+        if (Net==null) Net=new NetworkingRMI(this);
+        Net.IPServiceDestant=jTextFieldIPDeestant.getText();
+        SollicitationForm SF=new SollicitationForm(this,true);
+        SF.setVisible(true);
+        if(SF.OK){
+        Net.SendSollicitation(name);
+        }
+    }//GEN-LAST:event_jButtonSolliciterActionPerformed
     public static void main(String[] args) {
          // TODO code application logic here
          menu menu = new menu();
@@ -524,6 +546,7 @@ jButtonEndRecive.setEnabled(false);        // TODO add your handling code here:
     public javax.swing.JButton jButtonModifierPrescription;
     public javax.swing.JButton jButtonModifierTiers;
     private javax.swing.JButton jButtonRecever;
+    private javax.swing.JButton jButtonSolliciter;
     public javax.swing.JButton jButtonSupprimerPrescription;
     public javax.swing.JButton jButtonSupprimerTiers;
     private javax.swing.JLabel jLabel1;

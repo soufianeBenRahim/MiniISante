@@ -110,5 +110,14 @@ public void EndRecive(){
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     
+        public void SendSollicitation(String Message) {
+        try {
+            GetServiceDestant();
+            stubServiceDestant.DemmandeSolisitation(Message);
+        } catch (Exception ex) {
+            Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

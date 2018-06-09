@@ -21,14 +21,16 @@ public class NetworkingRMI {
     private IService stubServiceDestant;
     private IAnnuair stubAnnuair;
     private menu menu;
+
     public NetworkingRMI(menu _menu) {
-        menu=_menu;
+        menu = _menu;
     }
 
     public String IPAnnuaire;
     public String IPServiceDestant;
-public void EndRecive(){
-   
+
+    public void EndRecive() {
+
         try {
             Naming.unbind("rmi://localhost:1099/Service");
         } catch (RemoteException ex) {
@@ -38,7 +40,8 @@ public void EndRecive(){
         } catch (MalformedURLException ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
         }
-}
+    }
+
     public void Recive() {
         try {
             LocateRegistry.createRegistry(1099);
@@ -53,67 +56,71 @@ public void EndRecive(){
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-   public String GetIPUser(String Psudo) {
-        
+
+    public String GetIPUser(String Psudo) {
+
         try {
-            GetAnnuere();
+
             return stubAnnuair.GetIPUser(Psudo);
-           
-           } catch (Exception ex) {
+
+        } catch (Exception ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
         }
-       return null;
+        return null;
     }
+
     public boolean Connect(String name, String pass) {
         boolean result = false;
         try {
-            GetAnnuere();
+
             result = stubAnnuair.Login(name, pass);
             return result;
-           } catch (RemoteException ex) {
+        } catch (RemoteException ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
-   public boolean Deconnect(String name, String pass) {
-        
+
+    public boolean Deconnect(String name, String pass) {
+
         try {
-            GetAnnuere();
+
             return stubAnnuair.Desconect(name, pass);
-           } catch (RemoteException ex) {
+        } catch (RemoteException ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
         }
-      return false;
+        return false;
     }
+
     public void GetAnnuere() {
         try {
             stubAnnuair = (IAnnuair) Naming.lookup("rmi://" + IPAnnuaire + ":1090/Annuair");
         } catch (Exception ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
 
     public void GetServiceDestant() {
         try {
-            
-            stubServiceDestant = (IService) Naming.lookup("rmi://" + IPServiceDestant + ":1099/Service");
-        } catch (Exception ex) {
-            Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-    }
 
-     public void SendPrescription(Prescriptionentet p,List<PrescriptionDetail> detail) {
-        try {
-            GetServiceDestant();
-            stubServiceDestant.SetPrescription(p,detail);
+            stubServiceDestant = (IService) Naming.lookup("rmi://" + IPServiceDestant + ":1099/Service");
         } catch (Exception ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     
-        public void SendSollicitation(String Message) {
+
+    public void SendPrescription(Prescriptionentet p, List<PrescriptionDetail> detail) {
         try {
-            GetServiceDestant();
+
+            stubServiceDestant.SetPrescription(p, detail);
+        } catch (Exception ex) {
+            Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void SendSollicitation(String Message) {
+        try {
+
             stubServiceDestant.DemmandeSolisitation(Message);
         } catch (Exception ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);

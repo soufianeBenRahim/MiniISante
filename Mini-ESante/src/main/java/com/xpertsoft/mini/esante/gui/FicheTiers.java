@@ -5,7 +5,7 @@
  */
 package com.xpertsoft.mini.esante.gui;
 
-import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
+import com.xpertsoft.mini.esante.Metier.MiniESanteDAO;
 import com.xpertsoft.mini.esante.Model.Tiers;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +25,7 @@ public class FicheTiers extends javax.swing.JDialog {
         initComponents();
         this.ModeAppale=ModAppel;
         if(ModAppel.equals("Modifier")){
-            MetierImplimentationTiers m=new MetierImplimentationTiers();
+            MiniESanteDAO m=new MiniESanteDAO();
             Tiers Tr=m.GetTiersByID(NSS);
             jTextFieldNSS.setText(NSS);
             if(Tr.equals(null)) return;
@@ -173,7 +173,7 @@ public class FicheTiers extends javax.swing.JDialog {
 
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
            try {
-                   MetierImplimentationTiers M=new MetierImplimentationTiers();
+                   MiniESanteDAO M=new MiniESanteDAO();
                    Tiers T = new Tiers();
                    T.setNss(jTextFieldNSS.getText());
                    T.setNom(jTextFieldNom.getText());

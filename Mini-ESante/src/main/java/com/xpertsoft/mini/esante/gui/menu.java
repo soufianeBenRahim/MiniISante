@@ -1,9 +1,8 @@
 package com.xpertsoft.mini.esante.gui;
 
-import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
+import com.xpertsoft.mini.esante.Metier.MiniESanteDAO;
 import com.xpertsoft.mini.esante.Model.PrescriptionDetail;
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
-
 
 import com.xpertsoft.mini.esante.RMI.NetworkingRMI;
 import java.util.List;
@@ -14,48 +13,53 @@ import javax.swing.JOptionPane;
  *
  * @author Soufiane
  */
-public class menu extends javax.swing.JFrame  {
-private String name;
-private String pass;
+public class menu extends javax.swing.JFrame {
+
+    private String name;
+    private String pass;
     /**
      * Creates new form menu
      */
-   NetworkingRMI Net;
+    NetworkingRMI Net;
 
     public menu() {
 
         initComponents();
         // fenetre en maximeum
         this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
-       
+
         displayTiers();
         displayPrescription();
     }
-    public void SetIPDestant(String IP){
-    this.jTextFieldIPDeestant.setText(IP);
+
+    public void SetIPDestant(String IP) {
+        this.jTextFieldIPDeestant.setText(IP);
+        Net.GetServiceDestant();
     }
+
     private void displayTiers() {
-         MetierImplimentationTiers impTiers=new MetierImplimentationTiers();
-    this.TableTiers.setModel(new AbstractTableModelTiers(impTiers.getALLTiers()));
+        MiniESanteDAO impTiers = new MiniESanteDAO();
+        this.TableTiers.setModel(new AbstractTableModelTiers(impTiers.getALLTiers()));
     }
-    
-     private void displayPrescription() {
-         MetierImplimentationTiers impTiers=new MetierImplimentationTiers();
-         List<Prescriptionentet> pres=impTiers.getAllPrescription();
-         
-         this.jTablePRescription.setModel(new AbstractTableModelPrescription(pres));
-         if(pres.size()>0) {
-                this.jTablePRescription.setRowSelectionInterval(0, 0);
-                displayPrescriptionDetail(Integer.parseInt(this.jTablePRescription.
-                 getValueAt(0, 0).toString()));
-         }
-    }
-    
-        private void displayPrescriptionDetail(int IDprescription) {
-            MetierImplimentationTiers impTiers=new MetierImplimentationTiers();
-            this.jTablePrescriptionDetail.setModel(new AbstractTableModelPrescriptionDetail(
-                    impTiers.getDetailPrescription(IDprescription)));
+
+    private void displayPrescription() {
+        MiniESanteDAO impTiers = new MiniESanteDAO();
+        List<Prescriptionentet> pres = impTiers.getAllPrescription();
+
+        this.jTablePRescription.setModel(new AbstractTableModelPrescription(pres));
+        if (pres.size() > 0) {
+            this.jTablePRescription.setRowSelectionInterval(0, 0);
+            displayPrescriptionDetail(Integer.parseInt(this.jTablePRescription.
+                    getValueAt(0, 0).toString()));
         }
+    }
+
+    private void displayPrescriptionDetail(int IDprescription) {
+        MiniESanteDAO impTiers = new MiniESanteDAO();
+        this.jTablePrescriptionDetail.setModel(new AbstractTableModelPrescriptionDetail(
+                impTiers.getDetailPrescription(IDprescription)));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -382,155 +386,183 @@ private String pass;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSupprimerPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupprimerPrescriptionActionPerformed
-           MetierImplimentationTiers m =new MetierImplimentationTiers();
-        AbstractTableModelPrescription model=(AbstractTableModelPrescription)jTablePRescription.getModel();
+        MiniESanteDAO m = new MiniESanteDAO();
+        AbstractTableModelPrescription model = (AbstractTableModelPrescription) jTablePRescription.getModel();
         model.removePrescription(jTablePRescription.getSelectedRow());
         displayPrescription();
     }//GEN-LAST:event_jButtonSupprimerPrescriptionActionPerformed
 
     private void jButtonEnvoiyerPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoiyerPrescriptionActionPerformed
-       if (Net==null) Net=new NetworkingRMI(this);
-       Net.IPServiceDestant=jTextFieldIPDeestant.getText();
-        int ID=(int) jTablePRescription.getValueAt(jTablePRescription.getSelectedRow(),0);
-        MetierImplimentationTiers m = new MetierImplimentationTiers();
-        Prescriptionentet p=m.GetPrescriptionentetByID(ID);
-        List<PrescriptionDetail> detail=m.getDetailPrescription(p.getCodePrescription());
-        Net.SendPrescription(p,detail);
+
+        if (Net == null) {
+            Net = new NetworkingRMI(this);
+            Net.IPServiceDestant = jTextFieldIPDeestant.getText();
+            Net.GetServiceDestant();
+        }
+
+        int ID = (int) jTablePRescription.getValueAt(jTablePRescription.getSelectedRow(), 0);
+        MiniESanteDAO m = new MiniESanteDAO();
+        Prescriptionentet p = m.GetPrescriptionentetByID(ID);
+        List<PrescriptionDetail> detail = m.getDetailPrescription(p.getCodePrescription());
+        Net.SendPrescription(p, detail);
 // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEnvoiyerPrescriptionActionPerformed
 
     private void jButtonAjouterTiersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterTiersActionPerformed
-        FicheTiers FP = new FicheTiers(this, true,"Ajouter",null);
+        FicheTiers FP = new FicheTiers(this, true, "Ajouter", null);
         FP.setVisible(true);
         displayTiers();
-      
+
     }//GEN-LAST:event_jButtonAjouterTiersActionPerformed
 
     private void jButtonSupprimerTiersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupprimerTiersActionPerformed
-        MetierImplimentationTiers m =new MetierImplimentationTiers();
-        AbstractTableModelTiers model=(AbstractTableModelTiers)TableTiers.getModel();
-        int row=TableTiers.getSelectedRow();
-        if(row<0) return;
+        MiniESanteDAO m = new MiniESanteDAO();
+        AbstractTableModelTiers model = (AbstractTableModelTiers) TableTiers.getModel();
+        int row = TableTiers.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
         model.removeTiers(row);
         displayTiers();
         displayPrescription();
     }//GEN-LAST:event_jButtonSupprimerTiersActionPerformed
 
     private void jButtonConnectAnnuaireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectAnnuaireActionPerformed
-if (Net==null) Net=new NetworkingRMI(this);
-Net.IPAnnuaire=jTextFieldIPAdress.getText();
-LoginForm lf=new LoginForm(this,true);
-lf.setVisible(true);
-if(lf.connct){
-if(Net.Connect(lf.name, lf.Passs)){
-    this.name=lf.name;
-    this.pass=lf.Passs;
-    this.jButtonConnectAnnuaire.setEnabled(false);
-    this.jButtonDeconnectAnnuair.setEnabled(true);
-    JOptionPane.showMessageDialog(this, "Connexion avec succès");
-    }else{
-         JOptionPane.showMessageDialog(this, "connection a l'annuaire echoué");
-
+        if (Net == null) {
+            Net = new NetworkingRMI(this);
         }
-}
+        Net.IPAnnuaire = jTextFieldIPAdress.getText();
+        Net.GetAnnuere();
+        LoginForm lf = new LoginForm(this, true);
+        lf.setVisible(true);
+        if (lf.connct) {
+            if (Net.Connect(lf.name, lf.Passs)) {
+                this.name = lf.name;
+                this.pass = lf.Passs;
+                this.jButtonConnectAnnuaire.setEnabled(false);
+                this.jButtonDeconnectAnnuair.setEnabled(true);
+                JOptionPane.showMessageDialog(this, "Connexion avec succès");
+            } else {
+                JOptionPane.showMessageDialog(this, "connection a l'annuaire echoué");
 
+            }
+        }
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jButtonConnectAnnuaireActionPerformed
 
     private void jButtonModifierTiersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifierTiersActionPerformed
-        FicheTiers FP = new FicheTiers(this, true,"Modifier",(String) TableTiers.getValueAt(TableTiers.getSelectedRow(), 0));
+        FicheTiers FP = new FicheTiers(this, true, "Modifier", (String) TableTiers.getValueAt(TableTiers.getSelectedRow(), 0));
         FP.setVisible(true);
         displayTiers();        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonModifierTiersActionPerformed
 
     private void jButtonAjouterPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterPrescriptionActionPerformed
-        FichePrescription FP = new FichePrescription(this, true,"Ajouter",new Prescriptionentet(),null);
-        FP.setVisible(true); 
-        this.displayPrescription();  
-        
+        FichePrescription FP = new FichePrescription(this, true, "Ajouter", new Prescriptionentet(), null);
+        FP.setVisible(true);
+        this.displayPrescription();
+
 
     }//GEN-LAST:event_jButtonAjouterPrescriptionActionPerformed
 
     private void jButtonModifierPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifierPrescriptionActionPerformed
-        MetierImplimentationTiers m = new MetierImplimentationTiers();
-        Prescriptionentet p =m.GetPrescriptionentetByID((int)jTablePRescription.getValueAt(jTablePRescription.getSelectedRow(), 0));
-        
-        FichePrescription FP = new FichePrescription(this, true,"Modifier",p,null);
-        FP.setVisible(true); 
-        this.displayPrescription();  
+        MiniESanteDAO m = new MiniESanteDAO();
+        Prescriptionentet p = m.GetPrescriptionentetByID((int) jTablePRescription.getValueAt(jTablePRescription.getSelectedRow(), 0));
+
+        FichePrescription FP = new FichePrescription(this, true, "Modifier", p, null);
+        FP.setVisible(true);
+        this.displayPrescription();
     }//GEN-LAST:event_jButtonModifierPrescriptionActionPerformed
 
     private void jTablePRescriptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePRescriptionMouseClicked
-int row=jTablePRescription.getSelectedRow();
-if (row>=0){
-    int value=(int)jTablePRescription.getValueAt(row, 0);
-this.displayPrescriptionDetail(value);
-}
+        int row = jTablePRescription.getSelectedRow();
+        if (row >= 0) {
+            int value = (int) jTablePRescription.getValueAt(row, 0);
+            this.displayPrescriptionDetail(value);
+        }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jTablePRescriptionMouseClicked
 
     private void jButtonConnectClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectClientActionPerformed
-if (Net==null) Net=new NetworkingRMI(this);
-        Net.IPAnnuaire=jTextFieldIPAdress.getText();
-GetIPForm IF=new GetIPForm(this,true);
-IF.setVisible(true);
-if(IF.connect){
-if(IF.choix==1){
-    jTextFieldIPDeestant.setText(Net.GetIPUser(IF.Psudo));
+        if (Net == null) {
+            Net = new NetworkingRMI(this);
+            Net.IPAnnuaire = jTextFieldIPAdress.getText();
+            Net.GetAnnuere();
+        }
+        GetIPForm IF = new GetIPForm(this, true);
+        IF.setVisible(true);
+        if (IF.connect) {
+            if (IF.choix == 1) {
+                jTextFieldIPDeestant.setText(Net.GetIPUser(IF.Psudo));
 
-}else{
-jTextFieldIPDeestant.setText(IF.IP);
-}
-} 
+            } else {
+                jTextFieldIPDeestant.setText(IF.IP);
+            }
+            Net.IPServiceDestant = jTextFieldIPDeestant.getText();
+            Net.GetServiceDestant();
+        }
     }//GEN-LAST:event_jButtonConnectClientActionPerformed
 
     private void jButtonDeconnectAnnuairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeconnectAnnuairActionPerformed
-if (Net==null) Net=new NetworkingRMI(this);
-Net.IPAnnuaire=jTextFieldIPAdress.getText();
-if(Net.Deconnect(this.name,this.pass)){
-    this.jButtonConnectAnnuaire.setEnabled(true);
-    this.jButtonDeconnectAnnuair.setEnabled(false);
-}else{
-         JOptionPane.showMessageDialog(this, "déconnection a l'annuaire echoué");
+        if (Net == null) {
+            Net = new NetworkingRMI(this);
+            Net.IPAnnuaire = jTextFieldIPAdress.getText();
+            Net.GetAnnuere();
+        }
+        if (Net.Deconnect(this.name, this.pass)) {
+            this.jButtonConnectAnnuaire.setEnabled(true);
+            this.jButtonDeconnectAnnuair.setEnabled(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "déconnection a l'annuaire echoué");
 
         }
 
-    
-   
 // TODO add your handling code here:
     }//GEN-LAST:event_jButtonDeconnectAnnuairActionPerformed
 
     private void jButtonReceverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReceverActionPerformed
-if (Net==null) Net=new NetworkingRMI(this);
-Net.Recive();
-jButtonRecever.setEnabled(false);
-jButtonEndRecive.setEnabled(true);// TODO add your handling code here:
+        if (Net == null) {
+            Net = new NetworkingRMI(this);
+            Net.IPAnnuaire = jTextFieldIPAdress.getText();
+            Net.GetAnnuere();
+        }
+        Net.Recive();
+        jButtonRecever.setEnabled(false);
+        jButtonEndRecive.setEnabled(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButtonReceverActionPerformed
 
     private void jButtonEndReciveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEndReciveActionPerformed
-Net.EndRecive();
-jButtonRecever.setEnabled(true);
-jButtonEndRecive.setEnabled(false);        // TODO add your handling code here:
+        if (Net == null) {
+            Net = new NetworkingRMI(this);
+            Net.IPAnnuaire = jTextFieldIPAdress.getText();
+            Net.GetAnnuere();
+        }
+        Net.EndRecive();
+        jButtonRecever.setEnabled(true);
+        jButtonEndRecive.setEnabled(false);        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEndReciveActionPerformed
 
     private void jButtonSolliciterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSolliciterActionPerformed
-   
-        if (Net==null) Net=new NetworkingRMI(this);
-        Net.IPServiceDestant=jTextFieldIPDeestant.getText();
-        SollicitationForm SF=new SollicitationForm(this,true);
+
+        if (Net == null) {
+            Net = new NetworkingRMI(this);
+            Net.IPServiceDestant = jTextFieldIPDeestant.getText();
+            Net.GetServiceDestant();
+        }
+
+        SollicitationForm SF = new SollicitationForm(this, true);
         SF.setVisible(true);
-        if(SF.OK){
-        Net.SendSollicitation(name);
+        if (SF.OK) {
+            Net.SendSollicitation(name);
         }
     }//GEN-LAST:event_jButtonSolliciterActionPerformed
     public static void main(String[] args) {
-         // TODO code application logic here
-         menu menu = new menu();
-   
+        // TODO code application logic here
+        menu menu = new menu();
+
         menu.setVisible(true);
-    }  
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PannelPerspection;

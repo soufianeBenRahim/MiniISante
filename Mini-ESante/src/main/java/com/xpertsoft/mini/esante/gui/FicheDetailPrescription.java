@@ -4,7 +4,7 @@
  */
 package com.xpertsoft.mini.esante.gui;
 
-import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
+import com.xpertsoft.mini.esante.Metier.MiniESanteDAO;
 import com.xpertsoft.mini.esante.Model.PrescriptionDetail;
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
 import com.xpertsoft.mini.esante.Model.Tiers;
@@ -58,7 +58,7 @@ public class FicheDetailPrescription extends javax.swing.JDialog {
         });
         this.IDPrscription=IDPrescription;
             if(ModAppel.equals("Modifier")){
-            MetierImplimentationTiers m=new MetierImplimentationTiers();
+            MiniESanteDAO m=new MiniESanteDAO();
                 PrescriptionDetail d=m.GetPrescriptionDetailByID(IDPrescription);
                 if(d.equals(null)) return;
             jTextFieldID.setText(String.valueOf(IDPrescription));
@@ -168,7 +168,7 @@ public class FicheDetailPrescription extends javax.swing.JDialog {
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
           try {
-                   MetierImplimentationTiers M=new MetierImplimentationTiers();
+                   MiniESanteDAO M=new MiniESanteDAO();
                    PrescriptionDetail d= new PrescriptionDetail();
                    d.setDescription(jTextFieldDescription.getText());
           

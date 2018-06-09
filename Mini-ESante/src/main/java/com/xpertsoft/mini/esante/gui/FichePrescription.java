@@ -5,7 +5,7 @@
  */
 package com.xpertsoft.mini.esante.gui;
 
-import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
+import com.xpertsoft.mini.esante.Metier.MiniESanteDAO;
 import com.xpertsoft.mini.esante.Model.PrescriptionDetail;
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
 import com.xpertsoft.mini.esante.Model.Tiers;
@@ -30,7 +30,7 @@ public class FichePrescription extends javax.swing.JDialog {
         initComponents();
         ModAppel=_ModAppel;
         prescription=_p;
-             MetierImplimentationTiers m=new MetierImplimentationTiers();
+             MiniESanteDAO m=new MiniESanteDAO();
                 UTIL.RemplirComboBoxXD(jComboBoxAuteur, m.getALLTiers(), false, false);
                 UTIL.RemplirComboBoxXD(jComboBoxPatient, m.getALLTiers(), false, false);
         switch(ModAppel){                                                                              
@@ -293,7 +293,7 @@ switch(ModAppel){
            prescription.setOrganisation(jTextFieldOrganisation.getText());
            prescription.setAuteur((Tiers)jComboBoxAuteur.getSelectedItem());
            prescription.setPatient((Tiers)jComboBoxAuteur.getSelectedItem());
-           MetierImplimentationTiers m=new MetierImplimentationTiers();
+           MiniESanteDAO m=new MiniESanteDAO();
            this.jTextFieldIdID.setText(String.valueOf(m.SaveOrUpdatePrescriptionEntet(prescription)));
            setEnabled(true);
 //           jTableDetalPrescription.setModel(new AbstractTableModelPrescriptionDetail((List<PrescriptionDetail>) prescription.getDetail()));
@@ -325,7 +325,7 @@ model.removeDetail(this.jTableDetalPrescription.getSelectedRow());
     }//GEN-LAST:event_jButtonSuprimerLigneActionPerformed
 
     private void displayDetail() {
-        MetierImplimentationTiers impTiers=new MetierImplimentationTiers();
+        MiniESanteDAO impTiers=new MiniESanteDAO();
         this.jTableDetalPrescription.setModel(new AbstractTableModelPrescriptionDetail(impTiers.getDetailPrescription(Integer.parseInt(jTextFieldIdID.getText()))));
     }
 

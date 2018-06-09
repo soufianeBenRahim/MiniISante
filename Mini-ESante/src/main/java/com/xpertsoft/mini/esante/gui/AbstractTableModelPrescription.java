@@ -5,7 +5,7 @@
  */
 package com.xpertsoft.mini.esante.gui;
 
-import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
+import com.xpertsoft.mini.esante.Metier.MiniESanteDAO;
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
 import com.xpertsoft.mini.esante.Model.Tiers;
 import java.sql.Date;
@@ -123,7 +123,7 @@ public class AbstractTableModelPrescription extends AbstractTableModel{
     }
 
     public void removePrescription(int rowIndex) {
-        MetierImplimentationTiers m = new MetierImplimentationTiers();
+        MiniESanteDAO m = new MiniESanteDAO();
         int code=Prescriptios.get(rowIndex).getCodePrescription();
         m.DeletPrescriptionByID(code);
         Prescriptios.remove(rowIndex);

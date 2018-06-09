@@ -5,7 +5,7 @@
  */
 package com.xpertsoft.mini.esante.gui;
 
-import com.xpertsoft.mini.esante.Metier.MetierImplimentationTiers;
+import com.xpertsoft.mini.esante.Metier.MiniESanteDAO;
 import com.xpertsoft.mini.esante.Model.PrescriptionDetail;
 import com.xpertsoft.mini.esante.Model.Prescriptionentet;
 import java.util.List;
@@ -21,12 +21,12 @@ public class AbstractTableModelPrescriptionDetail extends AbstractTableModel {
         this.Detail = Detail;
      
         this.entetes=new String[]{"Description"};
-        m=new MetierImplimentationTiers();
+        m=new MiniESanteDAO();
     }
     private List<PrescriptionDetail> Detail;
 
     private String[] entetes;
-    MetierImplimentationTiers m;
+    MiniESanteDAO m;
     @Override
     public int getRowCount() {
         return Detail.size();//To change body of generated methods, choose Tools | Templates.
@@ -81,7 +81,7 @@ public class AbstractTableModelPrescriptionDetail extends AbstractTableModel {
 
     public void removeDetail(int rowIndex) {
        
-        MetierImplimentationTiers m = new MetierImplimentationTiers();
+        MiniESanteDAO m = new MiniESanteDAO();
         m.DeletDetailPrescriptionByID(Detail.get(rowIndex).getCodeDetail());
         Detail.remove(rowIndex);
         fireTableRowsDeleted(rowIndex, rowIndex);

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6 mai 2018 18:06:59 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="Model.Tiers" optimistic-lock="version" schema="NBUSER" table="TIERS">
+    <id name="nss" type="string">
+      <column length="15" name="NSS"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="nom" type="string">
+      <column length="45" name="NOM"/>
+    </property>
+    <property name="prenom" type="string">
+      <column length="45" name="PRENOM"/>
+    </property>
+    <property name="adress" type="string">
+      <column length="60" name="ADRESS"/>
+    </property>
+    <property name="datenaissance" type="date">
+      <column length="10" name="DATENAISSANCE"/>
+    </property>
+    <set cascade="all" inverse="true" name="prescriptions">
+      <key column="CODE_PATIENT" not-null="true"/>
+      <one-to-many class="Model.Prescriptionentet"/>
+    </set>
+    <set cascade="all" inverse="true" name="Redigedprescriptions">
+      <key column="CODE_AUTEUR" not-null="true"/>
+      <one-to-many class="Model.Prescriptionentet"/>
+    </set>
+  </class>
+</hibernate-mapping>

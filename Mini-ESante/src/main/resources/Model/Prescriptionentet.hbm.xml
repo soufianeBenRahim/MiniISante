@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6 mai 2018 18:06:59 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="Model.Prescriptionentet" optimistic-lock="version" schema="NBUSER" table="PRESCRIPTIONENTET">
+    <id name="codePrescription" type="int">
+      <column name="CODE_PRESCRIPTION"/>
+      <generator class="increment"/>
+    </id>
+    <property name="datePrescription" type="date">
+      <column length="10" name="DATE_PRESCRIPTION"/>
+    </property>
+    <property name="organisation" type="string">
+      <column length="40" name="ORGANISATION"/>
+    </property>
+    <property name="observation" type="string">
+      <column length="500" name="OBSERVATION"/>
+    </property>
+    <many-to-one class="Model.Tiers" column="CODE_AUTEUR" lazy="false" name="Auteur" not-null="true"/>
+    <many-to-one class="Model.Tiers" column="CODE_PATIENT" lazy="false" name="Patient" not-null="true"/>
+    <set cascade="all" inverse="true" name="detail">
+      <key column="CODE_PRESPECTION" not-null="true"/>
+      <one-to-many class="Model.PrescriptionDetail"/>
+    </set>
+  </class>
+</hibernate-mapping>

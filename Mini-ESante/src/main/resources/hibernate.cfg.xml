@@ -48,8 +48,8 @@ Contributor(s):
     <property name="hibernate.connection.password">Password</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory</property>
-    <mapping resource="com/xpertsoft/mini/esante/Model/Prescriptionentet.hbm.xml"/>
-    <mapping resource="com/xpertsoft/mini/esante/Model/PrescriptionDetail.hbm.xml"/>
-    <mapping resource="com/xpertsoft/mini/esante/Model/Tiers.hbm.xml"/>
+    <mapping class="" file="" jar="" package="" resource="Model/Prescriptionentet.hbm.xml"/>
+    <mapping resource="Model/PrescriptionDetail.hbm.xml"/>
+    <mapping resource="Model/Tiers.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

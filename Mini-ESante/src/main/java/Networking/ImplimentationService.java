@@ -1,0 +1,58 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Networking;
+
+import Model.PrescriptionDetail;
+import Model.Prescriptionentet;
+import Model.Tiers;
+import gui.FichePrescription;
+import gui.menu;
+
+import java.rmi.server.UnicastRemoteObject;
+import java.rmi.RemoteException;
+import java.security.cert.PKIXRevocationChecker;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.text.html.Option;
+
+
+/**
+ *
+ * @author soufiane
+ */
+public class ImplimentationService extends UnicastRemoteObject implements IService{
+menu menu;
+    public ImplimentationService(menu _menu) throws RemoteException{
+    super();
+    menu=_menu;
+}
+   @Override
+    public String SetPrescription(Prescriptionentet p,List<PrescriptionDetail> detail) throws RemoteException {
+        int result=JOptionPane.showConfirmDialog(menu,"Une Prescription vien d'etre arrivee voulez vous le voir", "Accuse de reception", JOptionPane.YES_NO_OPTION);
+        if(JOptionPane.YES_OPTION==result){
+        FichePrescription pf=new FichePrescription(menu, false, "Recever", p,detail);
+        pf.setVisible(true);
+        return "OK"; 
+        }else {
+            return "No";
+        }
+    }
+
+ 
+    @Override
+    public void DemmandeSolisitation(String Message) throws RemoteException {
+        try {
+            String IP = getClientHost();
+            int result=JOptionPane.showConfirmDialog(menu, Message,"Solisitation" , JOptionPane.YES_NO_OPTION);
+            if(result==JOptionPane.YES_OPTION){
+            menu.SetIPDestant(IP);
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+}

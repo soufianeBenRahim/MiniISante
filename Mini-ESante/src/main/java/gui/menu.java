@@ -7,6 +7,8 @@ import Model.Prescriptionentet;
 import Networking.NetworkingRMI;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -518,13 +520,14 @@ public class menu extends javax.swing.JFrame {
     private void jButtonConnectClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnectClientActionPerformed
         if (Net == null) {
             Net = new NetworkingRMI(this);
-            Net.IPAnnuaire = jTextFieldIPAdress.getText();
-            Net.GetAnnuere();
+         
         }
         GetIPForm IF = new GetIPForm(this, true);
         IF.setVisible(true);
         if (IF.connect) {
             if (IF.choix == 1) {
+                Net.IPAnnuaire = jTextFieldIPAdress.getText();
+                Net.GetAnnuere();
                 String IP =Net.GetIPUser(IF.Psudo);
                 jTextFieldIPDeestant.setText(IP);
 if(IP==null) {
@@ -559,8 +562,6 @@ return;
     private void jButtonReceverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReceverActionPerformed
         if (Net == null) {
             Net = new NetworkingRMI(this);
-            Net.IPAnnuaire = jTextFieldIPAdress.getText();
-            Net.GetAnnuere();
         }
         Net.Recive();
         jButtonRecever.setEnabled(false);
@@ -597,6 +598,12 @@ return;
         menu menu = new menu();
 
         menu.setVisible(true);
+         try {
+            LocateRegistry.createRegistry(1090);
+          
+        } catch (RemoteException ex) {
+            Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

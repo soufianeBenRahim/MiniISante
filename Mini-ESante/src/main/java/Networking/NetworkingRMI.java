@@ -31,7 +31,7 @@ public class NetworkingRMI {
     public void EndRecive() {
 
         try {
-            Naming.unbind("rmi://localhost:1099/Service");
+            Naming.unbind("rmi://localhost:1090/Service");
         } catch (RemoteException ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {
@@ -43,11 +43,11 @@ public class NetworkingRMI {
 
     public void Recive() {
         try {
-            LocateRegistry.createRegistry(1099);
+            
             if (serviceImp == null) {
                 serviceImp = new ImplimentationService(menu);
             }
-            Naming.rebind("rmi://localhost:1099/Service", serviceImp);
+            Naming.rebind("rmi://localhost:1090/Service", serviceImp);
             System.out.println(serviceImp.toString());
         } catch (RemoteException ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,7 +93,7 @@ public class NetworkingRMI {
 
     public void GetAnnuere() {
         try {
-            stubAnnuair = (IAnnuair) Naming.lookup("rmi://" + IPAnnuaire + ":1090/Annuair");
+            stubAnnuair = (IAnnuair) Naming.lookup("rmi://" + IPAnnuaire + ":1099/Annuair");
         } catch (Exception ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -102,7 +102,7 @@ public class NetworkingRMI {
     public void GetServiceDestant() {
         try {
 
-            stubServiceDestant = (IService) Naming.lookup("rmi://" + IPServiceDestant + ":1099/Service");
+            stubServiceDestant = (IService) Naming.lookup("rmi://" + IPServiceDestant + ":1090/Service");
         } catch (Exception ex) {
             Logger.getLogger(NetworkingRMI.class.getName()).log(Level.SEVERE, null, ex);
         }

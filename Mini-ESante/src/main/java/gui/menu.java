@@ -65,6 +65,7 @@ public class menu extends javax.swing.JFrame {
 
     public void SetIPDestant(String IP) {
         this.jTextFieldIPDeestant.setText(IP);
+        Net.IPServiceDestant=IP;
         Net.GetServiceDestant();
     }
 
